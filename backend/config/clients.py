@@ -15,10 +15,21 @@ from .settings import get_settings
 settings = get_settings()
 
 # ── Supabase Client ──────────────────────────────────────────────────────────
-supabase = create_client(
-    settings.SUPABASE_URL or "https://placeholder.supabase.co",
-    settings.SUPABASE_KEY or "placeholder_key"
-)
+_key = settings.SUPABASE_KEY or "placeholder_key"
+_url = settings.SUPABASE_URL or "https://placeholder.supabase.co"
+
+try:
+    if _key != "placeholder_key" and "." not in _key:
+        # Custom logic for non-JWT keys
+        fake_jwt = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiJ9.signature"
+        supabase = create_client(_url, fake_jwt)
+        supabase.postgrest.session.headers.update({"apikey": _key, "Authorization": f"Bearer {_key}"})
+    else:
+        supabase = create_client(_url, _key)
+except Exception as e:
+    print(f"CRITICAL: Failed to initialize Supabase client: {e}")
+    # Assign a dummy object or None to prevent crash on import
+    supabase = None
 
 # ── AI Clients ────────────────────────────────────────────────────────────────
 

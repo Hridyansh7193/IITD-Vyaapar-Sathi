@@ -31,6 +31,7 @@ from routers.chat import router as legacy_chat_router
 from routers.scanner import router as scanner_router
 from routers.ai_inventory import router as ai_inventory_router
 from profit_engine.router import router as profit_router
+from liquidity_engine.router import router as liquidity_router
 
 settings = get_settings()
 
@@ -92,6 +93,7 @@ app.include_router(legacy_chat_router)   # /chat-query
 app.include_router(scanner_router)       # /products, /sales/checkout, /inventory
 app.include_router(ai_inventory_router)  # /ai/parse-inventory
 app.include_router(profit_router)        # /v2/products, /v2/sales/checkout, /v2/inventory/add
+app.include_router(liquidity_router)     # /liquidity/initialize, /liquidity/status, /liquidity/expense
 
 
 # ── Health Check ──────────────────────────────────────────────────────────────

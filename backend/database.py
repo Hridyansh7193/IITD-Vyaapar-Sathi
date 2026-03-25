@@ -56,5 +56,5 @@ def init_db():
     Safe to call multiple times (only creates if not exists).
     """
     # Import all models here so SQLAlchemy registers them before creating tables
-    from models import user, product  # noqa: F401
+    from models import user, product, liquidity  # noqa: F401
     Base.metadata.create_all(bind=engine)

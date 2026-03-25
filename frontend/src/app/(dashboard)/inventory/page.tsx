@@ -5,6 +5,7 @@ import { createClient } from "@/utils/supabase/client";
 import { Package, Search, AlertCircle, Box, LayoutGrid } from "lucide-react";
 import { getApiUrl } from "@/lib/utils";
 import AIInventoryEntry from "@/components/inventory/AIInventoryEntry";
+import { toast } from "sonner";
 
 type InventoryItem = {
   name: string;
@@ -13,6 +14,8 @@ type InventoryItem = {
   sku: string;
   reorder_level?: number;
   days_inactive?: number;
+  daily_velocity?: number;
+  runway_days?: number;
 };
 
 export default function InventoryPage() {
@@ -36,7 +39,15 @@ export default function InventoryPage() {
         const res = await fetch(`${getApiUrl()}/inventory/list/${data.user.id}`);
         if (res.ok) {
           const json = await res.json();
-          setItems(json.sort((a: InventoryItem, b: InventoryItem) => (a.name || "").localeCompare(b.name || "")));
+          // Sort items alphabetically
+          const sorted = json.sort((a: InventoryItem, b: InventoryItem) => (a.name || "").localeCompare(b.name || ""));
+          setItems(sorted);
+          
+          // Check for Critical Runway alerts < 3 days (Incoming Repo Change)
+          const criticalItems = sorted.filter((item: InventoryItem) => item.runway_days && item.runway_days < 3);
+          if (criticalItems.length > 0) {
+              toast.error(`⚠️ ${criticalItems.length} products will run out of stock in less than 3 days!`, { duration: 8000 });
+          }
         }
       } catch (err) {
         console.error("Failed to fetch inventory", err);
@@ -129,6 +140,8 @@ export default function InventoryPage() {
                 <tr className="bg-muted/50 border-b border-border">
                   <th className="py-4 px-6 font-bold text-xs uppercase tracking-wider text-muted-foreground">Product</th>
                   <th className="py-4 px-6 font-bold text-xs uppercase tracking-wider text-muted-foreground">Category</th>
+                  <th className="py-4 px-6 font-bold text-xs uppercase tracking-wider text-muted-foreground text-center">Sales Velocity</th>
+                  <th className="py-4 px-6 font-bold text-xs uppercase tracking-wider text-muted-foreground text-center">Est. Runway</th>
                   <th className="py-4 px-6 font-bold text-xs uppercase tracking-wider text-muted-foreground text-right w-32">In Stock</th>
                 </tr>
               </thead>
@@ -156,6 +169,20 @@ export default function InventoryPage() {
                            )}
                         </div>
                       </td>
+                      <td className="py-4 px-6 text-center">
+                        <span className="font-bold text-muted-foreground">{item.daily_velocity || 0} / day</span>
+                      </td>
+                      <td className="py-4 px-6 text-center">
+                        {item.runway_days && item.runway_days < 3 ? (
+                           <span className="px-3 py-1 text-xs font-black uppercase rounded-full bg-red-500/10 text-red-500 border border-red-500/20 animate-pulse">
+                              {item.runway_days} Days Left
+                           </span>
+                        ) : item.runway_days === 999 ? (
+                           <span className="font-semibold text-muted-foreground opacity-50">999+ Days</span>
+                        ) : (
+                           <span className="font-semibold">{item.runway_days} Days</span>
+                        )}
+                      </td>
                       <td className="py-4 px-6 text-right">
                         <div className="flex items-center justify-end gap-2 group cursor-pointer" onClick={() => handleUpdateRol(item.sku, item.reorder_level || 5)}>
                           <span className={`text-lg font-black ${(item.stock_quantity <= (item.reorder_level || 5)) ? "text-red-500" : "text-foreground"}`}>
@@ -172,7 +199,7 @@ export default function InventoryPage() {
                   ))
                 ) : (
                   <tr>
-                    <td colSpan={3} className="py-12 text-center text-muted-foreground font-medium">
+                    <td colSpan={5} className="py-12 text-center text-muted-foreground font-medium">
                       No matching products found for "{searchQuery}"
                     </td>
                   </tr>
