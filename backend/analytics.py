@@ -80,7 +80,8 @@ def compute_analytics(df: pd.DataFrame) -> dict:
     
     if date_col and revenue_col and category_col:
         try:
-            df["_date"] = pd.to_datetime(df[date_col], errors="coerce", dayfirst=True)
+            # df["_date"] = pd.to_datetime(df[date_col], errors="coerce", dayfirst=True)
+            df["_date"] = pd.to_datetime(df[date_col],format="%Y-%m-%dT%H:%M:%S",errors="coerce")
             df = df.dropna(subset=["_date"])
             
             # 1. Weekly Category Trend

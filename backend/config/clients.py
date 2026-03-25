@@ -30,7 +30,8 @@ openai_client = OpenAI(
 
 # 2. Google Generative AI (Native)
 genai.configure(api_key=settings.GEMINI_API_KEY or "placeholder")
-gemini_model = genai.GenerativeModel(settings.AI_MODEL)
+_native_model_name = settings.AI_MODEL.replace("google/", "") if "/" in settings.AI_MODEL else settings.AI_MODEL
+gemini_model = genai.GenerativeModel(_native_model_name)
 
 # ── Old Logic Aliases (for legacy routers) ──────────────────────────────────
 gemini_api_key = settings.GEMINI_API_KEY

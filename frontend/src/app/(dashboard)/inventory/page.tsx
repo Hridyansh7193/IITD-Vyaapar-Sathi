@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { Package, Search, AlertCircle, Box, LayoutGrid } from "lucide-react";
 import { getApiUrl } from "@/lib/utils";
+import AIInventoryEntry from "@/components/inventory/AIInventoryEntry";
 
 type InventoryItem = {
   name: string;
@@ -18,6 +19,7 @@ export default function InventoryPage() {
   const [items, setItems] = useState<InventoryItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [userId, setUserId] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -30,11 +32,11 @@ export default function InventoryPage() {
           return;
         }
 
+        setUserId(data.user.id);
         const res = await fetch(`${getApiUrl()}/inventory/list/${data.user.id}`);
         if (res.ok) {
           const json = await res.json();
-          // Sort items alphabetically by default
-          setItems(json.sort((a: InventoryItem, b: InventoryItem) => a.name.localeCompare(b.name)));
+          setItems(json.sort((a: InventoryItem, b: InventoryItem) => (a.name || "").localeCompare(b.name || "")));
         }
       } catch (err) {
         console.error("Failed to fetch inventory", err);
@@ -48,8 +50,8 @@ export default function InventoryPage() {
 
   const filteredItems = items.filter(
     (item) =>
-      item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      item.category.toLowerCase().includes(searchQuery.toLowerCase())
+      (item.name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (item.category || "").toLowerCase().includes(searchQuery.toLowerCase())
   );
   
   const handleUpdateRol = async (sku: string, currentRol: number) => {
@@ -59,12 +61,10 @@ export default function InventoryPage() {
     if (isNaN(num)) return;
     
     try {
-        const supabase = createClient();
-        const { data } = await supabase.auth.getUser();
         await fetch(`${getApiUrl()}/inventory/update-reorder`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ sku: sku, user_id: data.user?.id, reorder_level: num })
+            body: JSON.stringify({ sku: sku, user_id: userId, reorder_level: num })
         });
         setItems(prev => prev.map(i => i.sku === sku ? {...i, reorder_level: num} : i));
     } catch (e) {
@@ -98,6 +98,11 @@ export default function InventoryPage() {
           />
         </div>
       </div>
+
+      {/* AI Smart Entry Section */}
+      {userId && (
+        <AIInventoryEntry userId={userId} />
+      )}
 
       {/* Main Table Card */}
       <div className="bg-card border border-border shadow-sm rounded-3xl overflow-hidden">
@@ -146,7 +151,7 @@ export default function InventoryPage() {
                            </span>
                            {item.days_inactive && item.days_inactive > 90 && (
                              <span className="px-2 py-0.5 text-[10px] font-black uppercase tracking-widest rounded-full bg-red-500/10 text-red-500 border border-red-500/20 shadow-sm animate-pulse">
-                               Dead Stock
+                                Dead Stock
                              </span>
                            )}
                         </div>
@@ -177,7 +182,6 @@ export default function InventoryPage() {
           </div>
         )}
       </div>
-
     </div>
   );
 }

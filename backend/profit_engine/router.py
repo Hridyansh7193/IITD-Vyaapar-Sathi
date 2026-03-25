@@ -46,18 +46,53 @@ def get_product_v2(user_id: str, barcode: str, db: Session = Depends(get_db)):
 def add_inventory_v2(data: AdvancedProductInput, db: Session = Depends(get_db)):
     """Log inventory with specific cost price for profit tracking."""
     try:
-        product = db.query(Product).filter(Product.sku == data.barcode, Product.user_id == data.user_id).first()
+        from sqlalchemy import func
+        clean_name = data.name.strip() if data.name else ""
+        clean_barcode = data.barcode.strip() if data.barcode else ""
+
+        print(f"DEBUG: Processing AI entry for user {data.user_id}. Name: '{clean_name}', SKU: '{clean_barcode}'")
+
+        # 1. Try finding by barcode (exact match)
+        product = None
+        if clean_barcode:
+            product = db.query(Product).filter(
+                Product.sku == clean_barcode, 
+                Product.user_id == data.user_id
+            ).first()
+            if product: print(f"DEBUG: Match found via Barcode: {product.sku}")
         
+        # 2. Fallback to name-matching (case-insensitive + trimmed) if no barcode match
+        if not product and clean_name:
+            # Query all products for this user and do a clean match in Python first if SQL complex
+            # Or use robust SQL lower and trim
+            product = db.query(Product).filter(
+                func.trim(func.lower(Product.name)) == func.trim(func.lower(clean_name)),
+                Product.user_id == data.user_id
+            ).first()
+            
+            if product:
+                print(f"DEBUG: Match found via Name: '{product.name}' (ID: {product.id})")
+                if not clean_barcode:
+                     clean_barcode = product.sku
+            else:
+                print(f"DEBUG: No product found with name '{clean_name}'. Searching alternative...")
+                # One more try: case-insensitive partial match? No, that's risky. 
+                # Let's just trust the trimmed lower match.
+
         if not product:
+            print(f"DEBUG: Creating NEW product for '{clean_name}'")
+            # Create new if still not found
+            batch_sku = clean_barcode or f"SKU-{str(uuid.uuid4())[:8].upper()}"
             product = Product(
                 user_id=data.user_id,
-                name=data.name,
+                name=clean_name,
                 category=data.category,
                 price=data.selling_price,
                 quantity=data.stock_quantity,
-                sku=data.barcode
+                sku=batch_sku
             )
             db.add(product)
+            clean_barcode = batch_sku
         else:
             product.quantity += data.stock_quantity
             if data.selling_price > 0: product.price = data.selling_price
