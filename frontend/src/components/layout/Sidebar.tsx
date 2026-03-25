@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { createClient } from "@/utils/supabase/client";
 import {
   LayoutDashboard,
   BarChart3,
@@ -14,13 +15,15 @@ import {
   Bell,
   UploadCloud,
   Zap,
-  ScanLine
+  ScanLine,
+  Package,
+  LogOut
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard" },
-  { icon: ScanLine, label: "POS & Inventory", href: "/scanner" },
+  { icon: Package, label: "My Inventory", href: "/inventory" },
   { icon: BarChart3, label: "Sales Analytics", href: "/analytics" },
   { icon: UploadCloud, label: "Upload Data", href: "/upload" },
   { icon: Lightbulb, label: "AI Insights", href: "/insights" },
@@ -37,6 +40,13 @@ const bottomItems = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/");
+  };
 
   return (
     <aside className="fixed left-0 top-0 z-40 h-screen w-64 border-r border-border bg-card/60 backdrop-blur-md transition-all">
@@ -95,6 +105,15 @@ export function Sidebar() {
                 </Link>
               </li>
             ))}
+            <li>
+              <button
+                onClick={handleSignOut}
+                className="w-full group flex items-center rounded-xl px-3 py-2.5 text-sm transition-all text-muted-foreground hover:bg-red-500/10 hover:text-red-500"
+              >
+                <LogOut className="h-5 w-5 flex-shrink-0 transition-transform group-hover:scale-110" />
+                <span className="ml-3 tracking-tight">Sign Out</span>
+              </button>
+            </li>
           </ul>
 
           <div className="mt-6 p-4 rounded-2xl bg-gradient-to-br from-primary/10 to-transparent border border-primary/10">

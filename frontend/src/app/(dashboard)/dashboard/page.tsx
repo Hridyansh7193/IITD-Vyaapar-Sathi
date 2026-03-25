@@ -108,8 +108,7 @@ export default function DashboardPage() {
   const revenueData = data?.revenue_data ?? [];
   const categoryData = data?.category_data ?? [];
   const statsData = data?.stats ?? {};
-  // Expanded color palette so categories don't repeat the same colors
-  const COLORS = ['#c3c0ff', '#4f46e5', '#4edea3', '#f59e0b', '#8b5cf6', '#ec4899', '#14b8a6', '#f43f5e', '#a855f7'];
+  const COLORS = ['#c3c0ff', '#4f46e5', '#4edea3', '#f59e0b'];
 
   const stats = [
     { title: "Revenue", value: statsData.total_revenue || "₹0", change: statsData.revenue_change || "+12%", icon: DollarSign, trend: "up" },
@@ -219,16 +218,11 @@ export default function DashboardPage() {
                 </div>
                 <div className="h-[240px] flex items-center justify-center relative">
                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                      <p className="text-xl font-bold max-w-[120px] truncate text-center" title={statsData.total_revenue || "₹0"}>{statsData.total_revenue || "₹0"}</p>
-                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Revenue</p>
+                      <p className="text-3xl font-bold">74%</p>
+                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Growth</p>
                    </div>
                    <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
-                         <Tooltip 
-                            contentStyle={{ borderRadius: '12px', border: '1px solid #e5e7eb', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                            itemStyle={{ color: '#000', fontWeight: 'bold' }}
-                            formatter={(value: any) => `₹${Number(value).toLocaleString()}`}
-                         />
                          <Pie data={categoryData} cx="50%" cy="50%" innerRadius={70} outerRadius={95} paddingAngle={8} dataKey="value" stroke="none">
                             {categoryData.map((_: any, index: number) => (
                               <Cell key={index} fill={COLORS[index % COLORS.length]} />

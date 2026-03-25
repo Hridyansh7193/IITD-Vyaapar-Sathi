@@ -28,3 +28,8 @@ venv/
 # Keep the following for this specific repo (optional, but keep it clean)
 # *.docx
 # *.webp
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3

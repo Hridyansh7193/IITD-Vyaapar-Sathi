@@ -13,6 +13,8 @@ export default function UploadPage() {
   const [uploadProgress, setUploadProgress] = useState(0);
   const [uploadStatus, setUploadStatus] = useState<"idle" | "success" | "error">("idle");
   const [previewData, setPreviewData] = useState<any[]>([]);
+  const [failedItems, setFailedItems] = useState<string[]>([]);
+  const [uploadMode, setUploadMode] = useState<"receive" | "checkout">("receive");
   const router = useRouter();
 
   const handleDragOver = (e: React.DragEvent) => e.preventDefault();
@@ -24,6 +26,7 @@ export default function UploadPage() {
       setFile(droppedFile);
       setUploadStatus("idle");
       setPreviewData([]);
+      setFailedItems([]);
     } else {
       toast.error("Please upload a CSV file");
     }
@@ -36,6 +39,7 @@ export default function UploadPage() {
       setUploadStatus("idle");
       setUploadProgress(0);
       setPreviewData([]);
+      setFailedItems([]);
     }
   };
 
@@ -68,7 +72,7 @@ export default function UploadPage() {
         setUploadProgress(p => (p < 90 ? p + 2 : p));
       }, 100);
 
-      const res = await fetch("http://localhost:8000/upload-sales", {
+      const res = await fetch(`http://localhost:8000/v2/upload/${uploadMode}`, {
         method: "POST",
         body: formData,
       });
@@ -84,7 +88,13 @@ export default function UploadPage() {
 
       setUploadStatus("success");
       setPreviewData(data.preview || []);
-      toast.success("CSV Uploaded and Processed!");
+      setFailedItems(data.failed_items || []);
+      
+      if (data.failed_items && data.failed_items.length > 0) {
+        toast.warning(data.details || `Processed with some skips. Check details below.`);
+      } else {
+        toast.success(data.details || "CSV Uploaded and Processed!");
+      }
       
       // Refresh dashboard background data
       router.refresh();
@@ -102,8 +112,30 @@ export default function UploadPage() {
     <div className="max-w-5xl mx-auto space-y-8 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Data Integration</h2>
-          <p className="text-muted-foreground mt-2">Connect your sales history to power the VyaaparMitra AI engine.</p>
+          <h2 className="text-3xl font-bold tracking-tight">Bulk Upload</h2>
+          <p className="text-muted-foreground mt-2">Upload a CSV to quickly receive new stock or process bulk checkout sales using the Profit Engine.</p>
+        </div>
+        <div className="flex bg-muted p-1 rounded-xl shadow-inner shadow-black/5 dark:shadow-white/5">
+          <button
+            onClick={() => setUploadMode("receive")}
+            className={`px-6 py-2 rounded-lg font-bold text-sm transition-all ${
+              uploadMode === "receive"
+                ? "bg-white dark:bg-zinc-800 text-black dark:text-white shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Receive Stock
+          </button>
+          <button
+            onClick={() => setUploadMode("checkout")}
+            className={`px-6 py-2 rounded-lg font-bold text-sm transition-all ${
+              uploadMode === "checkout"
+                ? "bg-white dark:bg-zinc-800 text-black dark:text-white shadow-sm"
+                : "text-muted-foreground hover:text-foreground"
+            }`}
+          >
+            Checkout
+          </button>
         </div>
       </div>
 
@@ -119,9 +151,9 @@ export default function UploadPage() {
             <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
               <UploadCloud className="w-10 h-10 text-primary" />
             </div>
-            <h3 className="text-xl font-bold mb-2">Upload Sales Dataset</h3>
-            <p className="text-muted-foreground mb-8 max-w-xs mx-auto">
-              Drag your sales CSV here. Ensure it includes Date, Product, Category, Price, and Quantity.
+            <h3 className="text-xl font-bold mb-2">Upload {uploadMode === "receive" ? "Stock Receipt" : "Sales Transactions"} CSV</h3>
+            <p className="text-muted-foreground mb-8 max-w-sm mx-auto">
+              Drag your {uploadMode === "receive" ? "inventory" : "sales"} CSV here. Ensure it includes at least a Product name and Quantity.
             </p>
             
             <input type="file" accept=".csv" className="hidden" id="fileInput" onChange={handleFileInput} />
@@ -146,7 +178,7 @@ export default function UploadPage() {
                     </div>
                     <div>
                       <p className="font-bold text-lg truncate max-w-md">{file.name}</p>
-                      <p className="text-sm text-muted-foreground">{(file.size / 1024).toFixed(1)} KB • Sales Dataset</p>
+                      <p className="text-sm text-muted-foreground">{(file.size / 1024).toFixed(1)} KB • {uploadMode === "receive" ? "Stock Receipt" : "Sales Transactions"}</p>
                     </div>
                   </div>
                   <button 
@@ -223,6 +255,24 @@ export default function UploadPage() {
               </div>
             </motion.div>
           )}
+
+          {failedItems.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-red-500/10 border border-red-500/20 rounded-2xl overflow-hidden mt-6"
+            >
+              <div className="p-4 border-b border-red-500/20 flex items-center bg-red-500/5">
+                <AlertCircle className="w-4 h-4 mr-2 text-red-500" />
+                <span className="font-bold text-sm text-red-500">Skipped Checkout Items ({failedItems.length})</span>
+              </div>
+              <ul className="p-4 space-y-2 text-sm text-red-500 font-medium max-h-48 overflow-y-auto">
+                {failedItems.map((msg, i) => (
+                  <li key={i}>• {msg}</li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
         </div>
 
         <div className="space-y-6">
@@ -232,16 +282,23 @@ export default function UploadPage() {
                Upload Guidelines
              </h4>
              <ul className="space-y-3 text-sm text-foreground/80">
+                {uploadMode === "receive" ? (
+                  <li className="flex items-start">
+                    <div className="w-4 h-4 bg-primary/20 rounded text-[10px] flex items-center justify-center font-bold mr-2 mt-0.5 flex-shrink-0">1</div>
+                    <span><strong className="text-foreground">Required Columns:</strong> <br/>Date, Product, Quantity, CostPrice</span>
+                  </li>
+                ) : (
+                  <li className="flex items-start">
+                    <div className="w-4 h-4 bg-primary/20 rounded text-[10px] flex items-center justify-center font-bold mr-2 mt-0.5 flex-shrink-0">1</div>
+                    <span><strong className="text-foreground">Required Columns:</strong> <br/>Date, Product, Quantity, Price</span>
+                  </li>
+                )}
                 <li className="flex items-start">
-                  <div className="w-4 h-4 bg-primary/20 rounded text-[10px] flex items-center justify-center font-bold mr-2 mt-0.5">1</div>
-                  Format must be .CSV
+                  <div className="w-4 h-4 bg-primary/20 rounded text-[10px] flex items-center justify-center font-bold mr-2 mt-0.5 flex-shrink-0">2</div>
+                  <span><strong className="text-foreground">Optional Columns:</strong> <br/>Category</span>
                 </li>
                 <li className="flex items-start">
-                  <div className="w-4 h-4 bg-primary/20 rounded text-[10px] flex items-center justify-center font-bold mr-2 mt-0.5">2</div>
-                  Columns: Date, Product, Category, Price, Quantity
-                </li>
-                <li className="flex items-start">
-                  <div className="w-4 h-4 bg-primary/20 rounded text-[10px] flex items-center justify-center font-bold mr-2 mt-0.5">3</div>
+                  <div className="w-4 h-4 bg-primary/20 rounded text-[10px] flex items-center justify-center font-bold mr-2 mt-0.5 flex-shrink-0">3</div>
                   Max rows recommended: 50,000
                 </li>
              </ul>

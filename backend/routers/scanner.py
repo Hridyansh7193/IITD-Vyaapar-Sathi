@@ -4,11 +4,30 @@ from pydantic import BaseModel
 import datetime
 import uuid
 
+from profit_engine.models import InventoryLog
 from config.clients import supabase
 from database import get_db
 from models.product import Product
 
 router = APIRouter()
+
+class ReorderUpdate(BaseModel):
+    sku: str
+    user_id: str
+    reorder_level: int
+
+@router.post("/inventory/update-reorder")
+def update_reorder(data: ReorderUpdate, db: Session = Depends(get_db)):
+    try:
+        product = db.query(Product).filter(Product.sku == data.sku, Product.user_id == data.user_id).first()
+        if product:
+            product.reorder_level = data.reorder_level
+            db.commit()
+            return {"message": "Success"}
+        raise HTTPException(status_code=404, detail="Not found")
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
 
 class ProductInput(BaseModel):
     barcode: str
@@ -107,13 +126,35 @@ def get_inventory_list(user_id: str, db: Session = Depends(get_db)):
     try:
         products = db.query(Product).filter(Product.user_id == user_id).all()
         mapped = []
+        now_dt = datetime.datetime.now(datetime.timezone.utc)
+        
         for p in products:
+            days_inactive = 0
+            wac = p.price
+            
+            all_logs = db.query(InventoryLog).filter(InventoryLog.barcode == p.sku, InventoryLog.user_id == user_id).all()
+            if all_logs:
+                total_cost = sum(log.cost_price * log.quantity_added for log in all_logs)
+                total_qty = sum(log.quantity_added for log in all_logs)
+                if total_qty > 0:
+                    wac = total_cost / total_qty
+                    
+                latest_log = max(all_logs, key=lambda l: l.date_added)
+                if latest_log.date_added:
+                    log_date = latest_log.date_added
+                    if log_date.tzinfo is None:
+                        log_date = log_date.replace(tzinfo=datetime.timezone.utc)
+                    days_inactive = (now_dt - log_date).days
+
             mapped.append({
                 "name": p.name,
                 "category": p.category,
                 "price": p.price,
+                "avg_cost": round(wac, 2),
                 "stock_quantity": p.quantity,
-                "barcode": p.sku
+                "sku": p.sku,
+                "reorder_level": p.reorder_level if hasattr(p, 'reorder_level') and p.reorder_level is not None else 5,
+                "days_inactive": days_inactive
             })
         return mapped
     except Exception as e:

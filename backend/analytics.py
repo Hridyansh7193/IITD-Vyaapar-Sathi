@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from profit_engine.analytics import compute_true_profit
 
 def compute_analytics(df: pd.DataFrame) -> dict:
     """
@@ -69,7 +70,9 @@ def compute_analytics(df: pd.DataFrame) -> dict:
     total_orders = len(df)
     total_units = int(df[quantity_col].sum()) if quantity_col else total_orders
     avg_order_value = total_revenue / total_orders if total_orders > 0 else 0.0
-    net_profit = total_revenue * 0.18  # Estimated 18% margin
+    
+    # Calculate True Profit (defaults to 18% if no cost_price data exists)
+    net_profit = compute_true_profit(df, total_revenue)
 
     # --- Detailed Trends ---
     category_trend = []
@@ -222,7 +225,7 @@ def compute_analytics(df: pd.DataFrame) -> dict:
     recommendations.append({
         "type": "neutral",
         "title": "Profitability Insight",
-        "description": f"Your estimated net profit is ₹{net_profit:,.0f} with an 18% margin assumption.",
+        "description": f"Your calculated net profit is ₹{net_profit:,.0f}. For older records, an 18% margin is assumed.",
         "action": "Consider reviewing supplier rates to increase margins",
     })
 

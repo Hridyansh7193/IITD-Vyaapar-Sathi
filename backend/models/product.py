@@ -21,6 +21,7 @@ class Product(Base):
     quantity = Column(Integer, default=0)
     sku = Column(String, nullable=True)
     description = Column(String, nullable=True)
+    reorder_level = Column(Integer, default=5, server_default='5')
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
