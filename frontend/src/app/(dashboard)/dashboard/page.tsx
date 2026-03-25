@@ -108,7 +108,7 @@ export default function DashboardPage() {
   const revenueData = data?.revenue_data ?? [];
   const categoryData = data?.category_data ?? [];
   const statsData = data?.stats ?? {};
-  const COLORS = ['#c3c0ff', '#4f46e5', '#4edea3', '#f59e0b'];
+  const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', '#f59e0b', '#10b981', '#06b6d4', '#3b82f6'];
 
   const stats = [
     { title: "Revenue", value: statsData.total_revenue || "₹0", change: statsData.revenue_change || "+12%", icon: DollarSign, trend: "up" },
@@ -213,14 +213,14 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
              <div className="p-8 rounded-[2rem] bg-card border border-border/50 shadow-sm space-y-6">
                 <div className="flex justify-between items-center">
-                  <h3 className="text-lg font-bold">Inventory Spread</h3>
-                  <p className="text-[10px] font-bold text-primary uppercase tracking-widest">Global</p>
+                   <h3 className="text-lg font-bold">Inventory Spread</h3>
+                   <p className="text-[10px] font-bold text-primary uppercase tracking-widest">Live Analysis</p>
                 </div>
                 <div className="h-[240px] flex items-center justify-center relative">
-                   <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                      <p className="text-3xl font-bold">74%</p>
-                      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">Growth</p>
-                   </div>
+                    <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+                       <p className="text-2xl font-bold">{statsData.revenue_change || "0%"}</p>
+                       <p className="text-[9px] font-bold text-muted-foreground uppercase tracking-widest">Revenue Change</p>
+                    </div>
                    <ResponsiveContainer width="100%" height="100%">
                       <PieChart>
                          <Pie data={categoryData} cx="50%" cy="50%" innerRadius={70} outerRadius={95} paddingAngle={8} dataKey="value" stroke="none">
