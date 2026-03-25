@@ -1,0 +1,59 @@
+MSME AI Growth Platform – Master Project Documentation
+1. Product Overview
+The MSME AI Growth Platform is a SaaS system designed to help small and medium businesses analyze their sales data and receive AI-powered business insights.
+The platform allows business owners to upload their sales datasets and automatically generates:• Sales analytics dashboards• Product performance insights• AI marketing recommendations• Demand forecasting• GST compliance summaries
+The goal of the platform is to function as an AI-powered business advisor for MSMEs.
+2. Problem Statement
+Millions of MSMEs operate without access to advanced analytics tools. Business owners frequently rely on intuition instead of data-driven decision making.
+Key challenges include:• Lack of sales analytics• Difficulty identifying high-performing products• Limited marketing insights• Complex GST compliance
+The MSME AI Growth Platform provides an accessible analytics and AI system that simplifies these processes.
+3. Product Vision
+To build an AI-powered growth intelligence platform that enables small businesses to make informed decisions using automated analytics and recommendations.
+4. Target Users
+Primary users include:• Retail shop owners• Restaurant operators• Small distributors• Local business operators
+These users typically have limited technical expertise and require simple dashboards with actionable insights.
+5. User Journey
+1. User registers or logs in.2. User uploads sales dataset.3. System validates and processes dataset.4. Analytics dashboard is generated.5. AI insights and recommendations appear.6. User reviews insights and downloads reports.
+6. System Architecture
+Frontend Layer:React / Next.js interface for dashboards and analytics pages.
+Backend Layer:FastAPI server handling APIs and business logic.
+Data Processing Layer:Python + Pandas for data analysis and aggregation.
+AI Layer:OpenAI / Gemini integration for insight generation.
+Database Layer:MongoDB for storing user data, datasets, and analytics results.
+7. Technology Stack
+Frontend:ReactNext.jsTailwind CSSRechartsFramer Motion
+Backend:FastAPIPythonUvicorn
+Data Processing:PandasNumPyScikit-learn
+AI Integration:OpenAI API or Gemini API
+Database:MongoDB
+Deployment:Vercel (frontend)Render (backend)
+8. Core Feature Modules
+Authentication SystemSecure login, signup, and account management.
+Sales Data UploadCSV upload system for business datasets.
+Dataset Processing PipelineData validation, cleaning, and aggregation.
+Sales Analytics DashboardRevenue metrics, charts, and product insights.
+AI Insight EngineBusiness recommendations and trend detection.
+Demand Forecasting ModuleFuture sales prediction using historical data.
+GST Compliance AssistantEstimated tax insights and summaries.
+Business Report GeneratorDownloadable reports in CSV or PDF format.
+AI Business Chat AssistantNatural language queries about business data.
+9. Web Application Page Structure
+Landing PageLogin / Signup PageSales Data Upload PageAnalytics DashboardProduct Performance PageAI Insights PageDemand Forecast PageGST Summary PageReports PageAI Chat Assistant PageNotification CenterAdmin PanelSettings Page
+10. Functional Requirements
+FR1: Users must be able to create accounts.FR2: Users must be able to upload CSV sales datasets.FR3: System must validate uploaded data.FR4: Analytics dashboards must be generated automatically.FR5: AI engine must provide business insights.FR6: System must estimate GST obligations.FR7: Reports must be downloadable.FR8: AI assistant must respond to business queries.
+11. Non-Functional Requirements
+Performance:Analytics dashboards should load within 5 seconds.
+Security:Secure authentication and protected data storage.
+Scalability:System should support large datasets and multiple users.
+Usability:User interface must be simple and intuitive.
+12. Security and Privacy
+• JWT-based authentication• Encrypted passwords using bcrypt• Secure file uploads• HTTPS communication• Role-based access control
+13. Deployment Architecture
+Frontend Deployment:Vercel hosting for Next.js application.
+Backend Deployment:Render cloud platform for API services.
+Database Hosting:MongoDB Atlas.
+Optional Infrastructure:Docker containers for deployment consistency.
+14. Future Enhancements
+• Real-time POS integrations• WhatsApp business notifications• Voice-based AI assistant• Automated GST filing• AI inventory optimization
+15. Hackathon Demo Plan
+Demo flow:1. Upload sample CSV dataset.2. Generate analytics dashboard.3. Display AI-generated marketing insights.4. Show demand forecasting visualization.5. Display GST summary and downloadable reports.

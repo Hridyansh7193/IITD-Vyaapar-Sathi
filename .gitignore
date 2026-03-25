@@ -1,0 +1,30 @@
+# Root .gitignore
+.DS_Store
+*.log
+*.pem
+*.key
+*.cert
+*.pfx
+*.p12
+*.zip
+*.tar
+*.gz
+*.rar
+*.7z
+node_modules/
+.next/
+__pycache__/
+venv/
+.env*
+.vercel/
+.idea/
+.vscode/
+*.webp
+*.docx
+*.pdf
+# (User files like docx and webp are listed but maybe they want to keep them?
+# Actually, I'll just keep the essentials)
+
+# Keep the following for this specific repo (optional, but keep it clean)
+# *.docx
+# *.webp

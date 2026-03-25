@@ -1,0 +1,44 @@
+# Vyaapar Mitra API — Python Dependencies
+# Install: pip install -r requirements.txt
+
+# ── Web Framework ──────────────────────────────────────────────────────────────
+fastapi>=0.110.0
+uvicorn[standard]>=0.27.0
+
+# ── Database (ORM) ─────────────────────────────────────────────────────────────
+sqlalchemy>=2.0.0
+# For PostgreSQL (uncomment when switching from SQLite):
+# psycopg2-binary>=2.9.0
+
+# ── Authentication ─────────────────────────────────────────────────────────────
+python-jose[cryptography]>=3.3.0   # JWT encoding/decoding
+bcrypt>=4.1.0                       # Password hashing
+passlib[bcrypt]>=1.7.4              # Bcrypt wrapper
+
+# ── Validation & Config ────────────────────────────────────────────────────────
+pydantic>=2.5.0
+pydantic-settings>=2.1.0
+pydantic[email]>=2.5.0              # Email validation
+python-dotenv>=1.0.0
+
+# ── Data Processing ────────────────────────────────────────────────────────────
+pandas>=2.1.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+
+# ── File Handling ──────────────────────────────────────────────────────────────
+python-multipart>=0.0.9             # Form/file uploads
+
+# ── PDF Generation ─────────────────────────────────────────────────────────────
+fpdf2>=2.7.0
+
+# ── Supabase (existing sales data) ─────────────────────────────────────────────
+supabase>=2.3.0
+
+# ── AI / OpenRouter ────────────────────────────────────────────────────────────
+openai>=1.12.0
+requests>=2.31.0
+google-generativeai>=0.8.0
+
+# ── HTTP Client ────────────────────────────────────────────────────────────────
+httpx>=0.26.0

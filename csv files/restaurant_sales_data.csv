@@ -1,0 +1,1001 @@
+date,product,category,price,quantity,revenue
+2024-02-29,Samosa,Snacks,134,4,536
+2024-04-10,Masala Dosa,South Indian,107,5,535
+2024-04-30,Tea,Beverages,181,4,724
+2024-01-15,Fried Rice,Rice,53,4,212
+2024-05-12,Paneer Butter Masala,Main Course,347,5,1735
+2024-06-04,Spring Rolls,Starters,328,5,1640
+2024-04-16,Paneer Butter Masala,Main Course,310,2,620
+2024-02-24,Spring Rolls,Starters,261,3,783
+2024-04-03,Cold Coffee,Beverages,358,3,1074
+2024-03-07,Manchurian,Starters,107,3,321
+2024-03-27,Spring Rolls,Starters,253,5,1265
+2024-06-26,Chole Bhature,Main Course,181,4,724
+2024-03-17,Paneer Butter Masala,Main Course,399,1,399
+2024-04-06,Kadhai Paneer,Main Course,347,2,694
+2024-05-20,Kadhai Paneer,Main Course,281,1,281
+2024-05-19,Tea,Beverages,192,2,384
+2024-06-21,Cold Coffee,Beverages,202,3,606
+2024-03-04,Kadhai Paneer,Main Course,100,2,200
+2024-03-02,Tea,Beverages,350,1,350
+2024-04-09,Kadhai Paneer,Main Course,103,1,103
+2024-04-15,Veg Biryani,Rice,307,5,1535
+2024-01-21,Manchurian,Starters,242,4,968
+2024-05-15,Fried Rice,Rice,229,3,687
+2024-05-09,Fried Rice,Rice,351,5,1755
+2024-04-18,Coffee,Beverages,302,1,302
+2024-01-08,Masala Dosa,South Indian,322,1,322
+2024-04-12,Butter Naan,Breads,314,5,1570
+2024-01-06,Samosa,Snacks,87,1,87
+2024-01-04,Masala Dosa,South Indian,351,5,1755
+2024-06-01,Paneer Butter Masala,Main Course,368,4,1472
+2024-02-08,Veg Biryani,Rice,101,2,202
+2024-03-25,Kadhai Paneer,Main Course,135,5,675
+2024-02-04,Spring Rolls,Starters,372,5,1860
+2024-01-20,Paneer Butter Masala,Main Course,274,3,822
+2024-02-20,Masala Dosa,South Indian,151,2,302
+2024-02-28,Chole Bhature,Main Course,264,1,264
+2024-05-05,Veg Biryani,Rice,195,5,975
+2024-02-21,Masala Dosa,South Indian,69,4,276
+2024-05-03,Fried Rice,Rice,282,3,846
+2024-01-19,Butter Naan,Breads,337,2,674
+2024-02-21,Tea,Beverages,309,5,1545
+2024-04-12,Garlic Naan,Breads,336,1,336
+2024-03-06,Samosa,Snacks,135,4,540
+2024-05-03,Paneer Butter Masala,Main Course,60,3,180
+2024-04-30,Chole Bhature,Main Course,210,4,840
+2024-03-17,Masala Dosa,South Indian,138,4,552
+2024-06-02,Spring Rolls,Starters,351,4,1404
+2024-03-25,Spring Rolls,Starters,390,2,780
+2024-05-01,Fried Rice,Rice,358,4,1432
+2024-05-18,Spring Rolls,Starters,136,1,136
+2024-04-22,Manchurian,Starters,335,2,670
+2024-03-13,Coffee,Beverages,131,5,655
+2024-04-16,Manchurian,Starters,118,2,236
+2024-01-25,Tea,Beverages,184,2,368
+2024-02-05,Coffee,Beverages,199,5,995
+2024-01-10,Garlic Naan,Breads,346,2,692
+2024-04-14,Fried Rice,Rice,335,2,670
+2024-05-01,Coffee,Beverages,109,5,545
+2024-03-25,Cold Coffee,Beverages,90,2,180
+2024-04-05,Coffee,Beverages,173,1,173
+2024-04-26,Manchurian,Starters,95,5,475
+2024-04-23,Manchurian,Starters,136,5,680
+2024-03-03,Masala Dosa,South Indian,213,3,639
+2024-01-27,Masala Dosa,South Indian,135,4,540
+2024-02-12,Samosa,Snacks,337,3,1011
+2024-05-14,Samosa,Snacks,75,1,75
+2024-05-19,Cold Coffee,Beverages,276,1,276
+2024-05-16,Butter Naan,Breads,129,5,645
+2024-04-28,Kadhai Paneer,Main Course,56,2,112
+2024-01-02,Butter Naan,Breads,373,4,1492
+2024-04-01,Tea,Beverages,217,5,1085
+2024-06-15,Garlic Naan,Breads,288,4,1152
+2024-02-13,Tea,Beverages,386,3,1158
+2024-01-25,Chole Bhature,Main Course,148,5,740
+2024-04-06,Fried Rice,Rice,398,4,1592
+2024-03-12,Paneer Butter Masala,Main Course,222,1,222
+2024-05-29,Idli,South Indian,54,3,162
+2024-05-02,Spring Rolls,Starters,50,4,200
+2024-03-24,Samosa,Snacks,253,1,253
+2024-03-05,Spring Rolls,Starters,59,3,177
+2024-01-26,Fried Rice,Rice,244,3,732
+2024-06-15,Garlic Naan,Breads,362,4,1448
+2024-04-08,Manchurian,Starters,231,2,462
+2024-05-03,Chole Bhature,Main Course,230,5,1150
+2024-03-11,Butter Naan,Breads,300,2,600
+2024-04-23,Fried Rice,Rice,175,5,875
+2024-01-12,Spring Rolls,Starters,169,3,507
+2024-05-09,Tea,Beverages,65,2,130
+2024-05-05,Cold Coffee,Beverages,184,2,368
+2024-05-19,Butter Naan,Breads,140,5,700
+2024-03-04,Fried Rice,Rice,180,5,900
+2024-05-18,Garlic Naan,Breads,400,5,2000
+2024-05-30,Samosa,Snacks,360,2,720
+2024-02-23,Masala Dosa,South Indian,190,5,950
+2024-05-06,Kadhai Paneer,Main Course,120,2,240
+2024-04-15,Masala Dosa,South Indian,244,5,1220
+2024-03-24,Kadhai Paneer,Main Course,115,5,575
+2024-05-07,Butter Naan,Breads,264,3,792
+2024-03-30,Butter Naan,Breads,191,1,191
+2024-05-20,Kadhai Paneer,Main Course,187,2,374
+2024-02-10,Masala Dosa,South Indian,263,5,1315
+2024-06-09,Coffee,Beverages,370,3,1110
+2024-01-08,Tea,Beverages,95,5,475
+2024-06-12,Tea,Beverages,119,3,357
+2024-06-10,Manchurian,Starters,175,4,700
+2024-04-21,Samosa,Snacks,397,2,794
+2024-01-05,Spring Rolls,Starters,63,5,315
+2024-06-08,Idli,South Indian,364,3,1092
+2024-04-08,Spring Rolls,Starters,134,1,134
+2024-03-03,Cold Coffee,Beverages,203,5,1015
+2024-01-25,Veg Biryani,Rice,329,5,1645
+2024-06-14,Chole Bhature,Main Course,108,2,216
+2024-01-24,Tea,Beverages,166,4,664
+2024-06-10,Paneer Butter Masala,Main Course,291,5,1455
+2024-02-16,Masala Dosa,South Indian,113,2,226
+2024-04-05,Masala Dosa,South Indian,393,2,786
+2024-02-01,Veg Biryani,Rice,77,5,385
+2024-02-22,Manchurian,Starters,258,4,1032
+2024-02-02,Cold Coffee,Beverages,87,3,261
+2024-01-21,Butter Naan,Breads,143,3,429
+2024-06-06,Tea,Beverages,363,3,1089
+2024-03-02,Tea,Beverages,284,3,852
+2024-01-09,Veg Biryani,Rice,270,2,540
+2024-06-02,Manchurian,Starters,207,1,207
+2024-06-07,Paneer Butter Masala,Main Course,61,3,183
+2024-02-08,Spring Rolls,Starters,387,5,1935
+2024-04-07,Manchurian,Starters,324,2,648
+2024-02-27,Fried Rice,Rice,284,3,852
+2024-05-27,Samosa,Snacks,159,1,159
+2024-05-08,Veg Biryani,Rice,219,4,876
+2024-02-11,Spring Rolls,Starters,179,2,358
+2024-02-23,Garlic Naan,Breads,227,4,908
+2024-03-22,Masala Dosa,South Indian,105,4,420
+2024-05-24,Veg Biryani,Rice,104,3,312
+2024-02-27,Coffee,Beverages,325,2,650
+2024-05-20,Tea,Beverages,266,3,798
+2024-02-23,Cold Coffee,Beverages,177,3,531
+2024-03-24,Manchurian,Starters,159,3,477
+2024-02-26,Chole Bhature,Main Course,380,2,760
+2024-03-14,Idli,South Indian,73,1,73
+2024-01-18,Idli,South Indian,213,2,426
+2024-06-19,Coffee,Beverages,298,5,1490
+2024-03-08,Fried Rice,Rice,66,4,264
+2024-01-17,Coffee,Beverages,111,2,222
+2024-04-09,Manchurian,Starters,136,1,136
+2024-05-09,Tea,Beverages,297,3,891
+2024-02-18,Spring Rolls,Starters,216,2,432
+2024-01-24,Chole Bhature,Main Course,359,5,1795
+2024-03-11,Garlic Naan,Breads,117,2,234
+2024-02-13,Coffee,Beverages,375,3,1125
+2024-01-17,Butter Naan,Breads,267,2,534
+2024-01-24,Samosa,Snacks,334,5,1670
+2024-02-06,Spring Rolls,Starters,105,1,105
+2024-05-03,Chole Bhature,Main Course,385,3,1155
+2024-04-05,Cold Coffee,Beverages,393,1,393
+2024-02-02,Kadhai Paneer,Main Course,150,3,450
+2024-05-31,Chole Bhature,Main Course,336,2,672
+2024-06-28,Veg Biryani,Rice,150,5,750
+2024-03-31,Coffee,Beverages,82,4,328
+2024-05-16,Paneer Butter Masala,Main Course,341,3,1023
+2024-05-12,Veg Biryani,Rice,383,5,1915
+2024-04-14,Coffee,Beverages,266,5,1330
+2024-01-03,Butter Naan,Breads,197,2,394
+2024-02-02,Butter Naan,Breads,297,4,1188
+2024-05-06,Cold Coffee,Beverages,154,1,154
+2024-02-02,Kadhai Paneer,Main Course,327,2,654
+2024-03-06,Chole Bhature,Main Course,236,3,708
+2024-02-23,Coffee,Beverages,142,4,568
+2024-06-02,Veg Biryani,Rice,238,3,714
+2024-06-02,Fried Rice,Rice,276,2,552
+2024-02-01,Paneer Butter Masala,Main Course,52,1,52
+2024-04-07,Idli,South Indian,306,2,612
+2024-06-16,Kadhai Paneer,Main Course,392,1,392
+2024-06-12,Veg Biryani,Rice,229,4,916
+2024-04-04,Manchurian,Starters,238,3,714
+2024-05-13,Fried Rice,Rice,343,3,1029
+2024-01-12,Spring Rolls,Starters,292,5,1460
+2024-02-21,Chole Bhature,Main Course,330,4,1320
+2024-01-28,Samosa,Snacks,231,2,462
+2024-01-01,Masala Dosa,South Indian,270,4,1080
+2024-01-11,Samosa,Snacks,165,2,330
+2024-05-19,Spring Rolls,Starters,192,1,192
+2024-05-30,Veg Biryani,Rice,322,2,644
+2024-01-02,Butter Naan,Breads,198,5,990
+2024-01-17,Fried Rice,Rice,201,3,603
+2024-06-26,Manchurian,Starters,197,4,788
+2024-02-24,Veg Biryani,Rice,379,4,1516
+2024-06-01,Veg Biryani,Rice,230,2,460
+2024-06-09,Tea,Beverages,176,2,352
+2024-01-25,Idli,South Indian,340,4,1360
+2024-01-24,Veg Biryani,Rice,148,3,444
+2024-01-10,Manchurian,Starters,58,1,58
+2024-02-21,Manchurian,Starters,348,5,1740
+2024-02-08,Fried Rice,Rice,270,2,540
+2024-03-23,Cold Coffee,Beverages,381,4,1524
+2024-04-08,Coffee,Beverages,352,5,1760
+2024-04-20,Butter Naan,Breads,98,3,294
+2024-05-24,Manchurian,Starters,185,5,925
+2024-06-01,Coffee,Beverages,148,4,592
+2024-03-12,Veg Biryani,Rice,116,3,348
+2024-03-02,Chole Bhature,Main Course,63,1,63
+2024-01-28,Samosa,Snacks,228,1,228
+2024-03-07,Veg Biryani,Rice,98,1,98
+2024-03-07,Cold Coffee,Beverages,182,2,364
+2024-05-06,Coffee,Beverages,328,2,656
+2024-03-14,Fried Rice,Rice,343,4,1372
+2024-02-25,Veg Biryani,Rice,170,3,510
+2024-04-29,Garlic Naan,Breads,210,1,210
+2024-04-12,Cold Coffee,Beverages,267,5,1335
+2024-03-03,Fried Rice,Rice,144,4,576
+2024-04-30,Masala Dosa,South Indian,237,2,474
+2024-04-22,Paneer Butter Masala,Main Course,372,2,744
+2024-03-24,Butter Naan,Breads,75,2,150
+2024-01-08,Cold Coffee,Beverages,136,2,272
+2024-01-27,Idli,South Indian,221,5,1105
+2024-01-23,Butter Naan,Breads,284,5,1420
+2024-01-25,Fried Rice,Rice,60,5,300
+2024-05-31,Tea,Beverages,337,5,1685
+2024-02-16,Spring Rolls,Starters,166,4,664
+2024-03-14,Veg Biryani,Rice,92,5,460
+2024-06-28,Spring Rolls,Starters,285,5,1425
+2024-01-05,Paneer Butter Masala,Main Course,74,1,74
+2024-03-30,Chole Bhature,Main Course,332,3,996
+2024-04-21,Tea,Beverages,203,1,203
+2024-03-13,Cold Coffee,Beverages,253,4,1012
+2024-06-03,Spring Rolls,Starters,77,2,154
+2024-05-03,Veg Biryani,Rice,119,3,357
+2024-05-01,Butter Naan,Breads,60,3,180
+2024-05-04,Paneer Butter Masala,Main Course,314,5,1570
+2024-02-10,Manchurian,Starters,119,1,119
+2024-01-04,Kadhai Paneer,Main Course,368,5,1840
+2024-01-28,Paneer Butter Masala,Main Course,373,2,746
+2024-02-24,Masala Dosa,South Indian,319,3,957
+2024-04-03,Masala Dosa,South Indian,77,1,77
+2024-05-15,Butter Naan,Breads,176,2,352
+2024-01-09,Masala Dosa,South Indian,353,4,1412
+2024-02-23,Veg Biryani,Rice,55,1,55
+2024-03-15,Masala Dosa,South Indian,149,2,298
+2024-01-10,Paneer Butter Masala,Main Course,339,4,1356
+2024-05-17,Cold Coffee,Beverages,102,4,408
+2024-01-22,Fried Rice,Rice,380,1,380
+2024-01-02,Fried Rice,Rice,229,1,229
+2024-06-01,Fried Rice,Rice,230,5,1150
+2024-01-30,Samosa,Snacks,339,5,1695
+2024-02-28,Paneer Butter Masala,Main Course,241,1,241
+2024-01-12,Fried Rice,Rice,249,1,249
+2024-03-12,Kadhai Paneer,Main Course,398,5,1990
+2024-05-06,Chole Bhature,Main Course,76,4,304
+2024-03-10,Cold Coffee,Beverages,185,1,185
+2024-02-14,Fried Rice,Rice,192,3,576
+2024-01-09,Idli,South Indian,304,1,304
+2024-03-12,Spring Rolls,Starters,325,3,975
+2024-05-17,Garlic Naan,Breads,373,1,373
+2024-04-24,Fried Rice,Rice,85,4,340
+2024-04-28,Samosa,Snacks,215,3,645
+2024-02-24,Tea,Beverages,103,5,515
+2024-02-19,Tea,Beverages,93,1,93
+2024-02-23,Manchurian,Starters,51,1,51
+2024-05-21,Veg Biryani,Rice,347,1,347
+2024-04-02,Samosa,Snacks,358,1,358
+2024-01-27,Idli,South Indian,299,1,299
+2024-05-12,Samosa,Snacks,288,1,288
+2024-06-14,Tea,Beverages,317,3,951
+2024-05-19,Masala Dosa,South Indian,317,4,1268
+2024-03-04,Veg Biryani,Rice,387,5,1935
+2024-02-24,Idli,South Indian,139,4,556
+2024-03-24,Chole Bhature,Main Course,306,2,612
+2024-06-25,Idli,South Indian,188,1,188
+2024-06-17,Fried Rice,Rice,165,5,825
+2024-02-07,Kadhai Paneer,Main Course,200,1,200
+2024-03-25,Spring Rolls,Starters,70,5,350
+2024-05-21,Fried Rice,Rice,396,2,792
+2024-06-04,Cold Coffee,Beverages,379,4,1516
+2024-06-17,Fried Rice,Rice,364,5,1820
+2024-02-09,Samosa,Snacks,106,2,212
+2024-03-18,Cold Coffee,Beverages,76,5,380
+2024-05-04,Idli,South Indian,232,5,1160
+2024-03-10,Coffee,Beverages,333,3,999
+2024-03-28,Coffee,Beverages,252,1,252
+2024-05-26,Paneer Butter Masala,Main Course,216,2,432
+2024-03-08,Veg Biryani,Rice,312,5,1560
+2024-04-19,Garlic Naan,Breads,308,2,616
+2024-06-18,Cold Coffee,Beverages,354,1,354
+2024-02-11,Samosa,Snacks,121,1,121
+2024-01-30,Spring Rolls,Starters,302,3,906
+2024-02-05,Cold Coffee,Beverages,315,4,1260
+2024-04-27,Tea,Beverages,385,5,1925
+2024-04-15,Spring Rolls,Starters,225,3,675
+2024-05-02,Idli,South Indian,173,4,692
+2024-06-06,Cold Coffee,Beverages,365,3,1095
+2024-04-11,Chole Bhature,Main Course,102,1,102
+2024-04-17,Chole Bhature,Main Course,279,1,279
+2024-03-10,Spring Rolls,Starters,229,1,229
+2024-05-30,Cold Coffee,Beverages,132,3,396
+2024-06-15,Garlic Naan,Breads,248,2,496
+2024-01-10,Masala Dosa,South Indian,216,3,648
+2024-03-18,Garlic Naan,Breads,388,5,1940
+2024-02-15,Garlic Naan,Breads,87,2,174
+2024-04-22,Butter Naan,Breads,334,2,668
+2024-06-05,Coffee,Beverages,307,1,307
+2024-05-30,Idli,South Indian,283,5,1415
+2024-01-08,Paneer Butter Masala,Main Course,173,3,519
+2024-05-08,Masala Dosa,South Indian,136,5,680
+2024-05-22,Garlic Naan,Breads,199,1,199
+2024-06-19,Paneer Butter Masala,Main Course,106,4,424
+2024-02-22,Spring Rolls,Starters,89,2,178
+2024-03-09,Cold Coffee,Beverages,135,5,675
+2024-05-29,Garlic Naan,Breads,252,4,1008
+2024-02-22,Tea,Beverages,389,1,389
+2024-04-26,Cold Coffee,Beverages,153,2,306
+2024-05-12,Garlic Naan,Breads,335,5,1675
+2024-02-08,Butter Naan,Breads,345,2,690
+2024-03-27,Veg Biryani,Rice,105,2,210
+2024-06-06,Butter Naan,Breads,59,1,59
+2024-03-02,Tea,Beverages,72,3,216
+2024-04-05,Kadhai Paneer,Main Course,363,5,1815
+2024-05-15,Cold Coffee,Beverages,323,2,646
+2024-03-12,Spring Rolls,Starters,139,1,139
+2024-02-20,Butter Naan,Breads,378,2,756
+2024-03-24,Butter Naan,Breads,296,1,296
+2024-03-25,Masala Dosa,South Indian,273,4,1092
+2024-04-04,Cold Coffee,Beverages,220,4,880
+2024-04-20,Garlic Naan,Breads,182,4,728
+2024-06-28,Garlic Naan,Breads,305,2,610
+2024-03-28,Fried Rice,Rice,331,5,1655
+2024-03-08,Veg Biryani,Rice,186,1,186
+2024-05-09,Tea,Beverages,119,1,119
+2024-06-27,Garlic Naan,Breads,249,4,996
+2024-05-17,Fried Rice,Rice,97,3,291
+2024-02-29,Veg Biryani,Rice,117,2,234
+2024-04-20,Veg Biryani,Rice,193,2,386
+2024-05-08,Veg Biryani,Rice,118,1,118
+2024-02-26,Coffee,Beverages,320,3,960
+2024-03-05,Manchurian,Starters,122,3,366
+2024-01-05,Kadhai Paneer,Main Course,73,4,292
+2024-03-01,Paneer Butter Masala,Main Course,347,1,347
+2024-02-26,Spring Rolls,Starters,289,1,289
+2024-04-30,Veg Biryani,Rice,174,2,348
+2024-04-11,Coffee,Beverages,326,3,978
+2024-01-31,Chole Bhature,Main Course,149,4,596
+2024-03-11,Chole Bhature,Main Course,94,3,282
+2024-04-12,Spring Rolls,Starters,254,4,1016
+2024-03-28,Tea,Beverages,185,2,370
+2024-06-20,Kadhai Paneer,Main Course,270,4,1080
+2024-01-03,Fried Rice,Rice,216,1,216
+2024-05-02,Chole Bhature,Main Course,233,5,1165
+2024-06-06,Tea,Beverages,351,2,702
+2024-01-06,Manchurian,Starters,50,5,250
+2024-04-06,Masala Dosa,South Indian,295,1,295
+2024-04-04,Samosa,Snacks,150,1,150
+2024-03-22,Spring Rolls,Starters,183,1,183
+2024-01-21,Tea,Beverages,61,1,61
+2024-04-30,Butter Naan,Breads,167,5,835
+2024-01-12,Samosa,Snacks,178,1,178
+2024-03-28,Coffee,Beverages,293,2,586
+2024-04-15,Samosa,Snacks,232,2,464
+2024-04-25,Tea,Beverages,368,4,1472
+2024-05-24,Kadhai Paneer,Main Course,275,5,1375
+2024-06-26,Fried Rice,Rice,338,2,676
+2024-01-03,Cold Coffee,Beverages,286,1,286
+2024-01-14,Paneer Butter Masala,Main Course,383,3,1149
+2024-01-18,Paneer Butter Masala,Main Course,121,3,363
+2024-04-30,Chole Bhature,Main Course,76,3,228
+2024-04-05,Spring Rolls,Starters,155,5,775
+2024-01-04,Kadhai Paneer,Main Course,50,2,100
+2024-03-25,Paneer Butter Masala,Main Course,241,5,1205
+2024-06-21,Coffee,Beverages,269,3,807
+2024-06-12,Garlic Naan,Breads,204,2,408
+2024-02-08,Veg Biryani,Rice,398,4,1592
+2024-05-17,Veg Biryani,Rice,286,5,1430
+2024-02-11,Fried Rice,Rice,308,1,308
+2024-05-16,Kadhai Paneer,Main Course,169,3,507
+2024-02-14,Fried Rice,Rice,214,3,642
+2024-04-28,Spring Rolls,Starters,69,3,207
+2024-06-01,Masala Dosa,South Indian,106,3,318
+2024-05-15,Fried Rice,Rice,176,3,528
+2024-02-23,Samosa,Snacks,261,4,1044
+2024-06-17,Veg Biryani,Rice,304,1,304
+2024-03-11,Manchurian,Starters,364,3,1092
+2024-01-11,Paneer Butter Masala,Main Course,305,5,1525
+2024-06-23,Spring Rolls,Starters,196,2,392
+2024-01-01,Idli,South Indian,63,5,315
+2024-04-30,Fried Rice,Rice,125,2,250
+2024-04-09,Paneer Butter Masala,Main Course,138,5,690
+2024-03-11,Samosa,Snacks,290,2,580
+2024-03-13,Coffee,Beverages,77,4,308
+2024-02-12,Paneer Butter Masala,Main Course,217,4,868
+2024-05-29,Tea,Beverages,151,2,302
+2024-05-07,Butter Naan,Breads,53,1,53
+2024-04-22,Kadhai Paneer,Main Course,234,1,234
+2024-05-09,Masala Dosa,South Indian,83,4,332
+2024-01-07,Manchurian,Starters,171,4,684
+2024-04-29,Samosa,Snacks,119,2,238
+2024-04-23,Veg Biryani,Rice,213,5,1065
+2024-06-06,Paneer Butter Masala,Main Course,180,2,360
+2024-02-21,Coffee,Beverages,296,1,296
+2024-03-25,Spring Rolls,Starters,318,1,318
+2024-04-28,Cold Coffee,Beverages,108,3,324
+2024-05-17,Samosa,Snacks,319,4,1276
+2024-06-10,Garlic Naan,Breads,270,4,1080
+2024-04-23,Kadhai Paneer,Main Course,262,3,786
+2024-05-06,Chole Bhature,Main Course,210,5,1050
+2024-05-03,Veg Biryani,Rice,386,2,772
+2024-06-09,Manchurian,Starters,201,5,1005
+2024-05-17,Veg Biryani,Rice,259,4,1036
+2024-06-06,Coffee,Beverages,164,2,328
+2024-05-24,Masala Dosa,South Indian,97,5,485
+2024-02-26,Chole Bhature,Main Course,130,2,260
+2024-06-13,Coffee,Beverages,258,5,1290
+2024-06-04,Samosa,Snacks,367,5,1835
+2024-01-10,Manchurian,Starters,90,1,90
+2024-04-29,Paneer Butter Masala,Main Course,62,4,248
+2024-02-09,Spring Rolls,Starters,75,1,75
+2024-01-06,Idli,South Indian,55,4,220
+2024-06-11,Veg Biryani,Rice,196,2,392
+2024-03-25,Kadhai Paneer,Main Course,199,4,796
+2024-06-19,Chole Bhature,Main Course,379,3,1137
+2024-06-17,Tea,Beverages,125,1,125
+2024-02-19,Samosa,Snacks,229,1,229
+2024-06-24,Fried Rice,Rice,221,3,663
+2024-06-20,Fried Rice,Rice,303,1,303
+2024-04-12,Masala Dosa,South Indian,216,4,864
+2024-04-08,Fried Rice,Rice,244,4,976
+2024-02-29,Cold Coffee,Beverages,277,4,1108
+2024-05-18,Fried Rice,Rice,164,4,656
+2024-05-11,Masala Dosa,South Indian,183,5,915
+2024-05-24,Butter Naan,Breads,323,4,1292
+2024-06-11,Butter Naan,Breads,110,1,110
+2024-02-03,Coffee,Beverages,177,4,708
+2024-03-23,Kadhai Paneer,Main Course,280,4,1120
+2024-03-11,Cold Coffee,Beverages,124,2,248
+2024-02-25,Chole Bhature,Main Course,250,4,1000
+2024-02-27,Masala Dosa,South Indian,217,1,217
+2024-03-18,Butter Naan,Breads,335,2,670
+2024-01-04,Coffee,Beverages,184,1,184
+2024-04-19,Spring Rolls,Starters,245,1,245
+2024-06-17,Paneer Butter Masala,Main Course,158,5,790
+2024-02-23,Garlic Naan,Breads,339,3,1017
+2024-05-13,Cold Coffee,Beverages,139,5,695
+2024-04-08,Coffee,Beverages,66,3,198
+2024-06-12,Samosa,Snacks,115,5,575
+2024-03-18,Masala Dosa,South Indian,205,5,1025
+2024-04-23,Tea,Beverages,56,3,168
+2024-04-14,Masala Dosa,South Indian,159,5,795
+2024-05-12,Coffee,Beverages,131,5,655
+2024-02-28,Manchurian,Starters,266,2,532
+2024-05-07,Spring Rolls,Starters,400,1,400
+2024-03-22,Kadhai Paneer,Main Course,206,5,1030
+2024-03-14,Fried Rice,Rice,206,2,412
+2024-05-27,Idli,South Indian,157,2,314
+2024-04-02,Idli,South Indian,110,4,440
+2024-04-27,Veg Biryani,Rice,341,4,1364
+2024-03-23,Manchurian,Starters,362,5,1810
+2024-03-02,Masala Dosa,South Indian,135,4,540
+2024-05-10,Kadhai Paneer,Main Course,316,3,948
+2024-06-23,Coffee,Beverages,202,2,404
+2024-03-13,Masala Dosa,South Indian,65,2,130
+2024-06-25,Idli,South Indian,321,2,642
+2024-04-11,Tea,Beverages,137,5,685
+2024-02-08,Chole Bhature,Main Course,308,3,924
+2024-03-24,Butter Naan,Breads,283,3,849
+2024-05-04,Spring Rolls,Starters,145,5,725
+2024-03-23,Coffee,Beverages,333,1,333
+2024-06-03,Paneer Butter Masala,Main Course,337,1,337
+2024-06-02,Chole Bhature,Main Course,386,4,1544
+2024-06-25,Butter Naan,Breads,78,1,78
+2024-01-17,Spring Rolls,Starters,290,4,1160
+2024-03-22,Chole Bhature,Main Course,249,5,1245
+2024-02-19,Fried Rice,Rice,151,1,151
+2024-01-09,Tea,Beverages,60,4,240
+2024-03-24,Idli,South Indian,378,3,1134
+2024-02-22,Kadhai Paneer,Main Course,79,1,79
+2024-05-09,Garlic Naan,Breads,294,2,588
+2024-06-03,Kadhai Paneer,Main Course,237,4,948
+2024-01-20,Masala Dosa,South Indian,93,1,93
+2024-04-17,Butter Naan,Breads,129,3,387
+2024-04-17,Tea,Beverages,90,5,450
+2024-01-22,Veg Biryani,Rice,199,4,796
+2024-06-25,Chole Bhature,Main Course,396,4,1584
+2024-04-14,Tea,Beverages,377,4,1508
+2024-05-27,Fried Rice,Rice,109,3,327
+2024-01-12,Garlic Naan,Breads,168,3,504
+2024-06-26,Coffee,Beverages,334,4,1336
+2024-03-01,Spring Rolls,Starters,273,5,1365
+2024-05-25,Veg Biryani,Rice,205,3,615
+2024-02-21,Paneer Butter Masala,Main Course,394,3,1182
+2024-04-19,Paneer Butter Masala,Main Course,109,4,436
+2024-06-07,Kadhai Paneer,Main Course,127,4,508
+2024-06-21,Butter Naan,Breads,221,4,884
+2024-03-13,Butter Naan,Breads,376,4,1504
+2024-06-12,Butter Naan,Breads,235,1,235
+2024-06-18,Garlic Naan,Breads,349,2,698
+2024-05-03,Samosa,Snacks,317,1,317
+2024-05-02,Butter Naan,Breads,66,5,330
+2024-05-28,Paneer Butter Masala,Main Course,153,4,612
+2024-04-18,Butter Naan,Breads,202,3,606
+2024-01-30,Coffee,Beverages,339,4,1356
+2024-06-11,Cold Coffee,Beverages,331,3,993
+2024-01-06,Garlic Naan,Breads,243,5,1215
+2024-05-10,Paneer Butter Masala,Main Course,274,2,548
+2024-05-11,Butter Naan,Breads,241,4,964
+2024-04-17,Samosa,Snacks,320,2,640
+2024-03-19,Tea,Beverages,130,4,520
+2024-04-01,Chole Bhature,Main Course,113,4,452
+2024-01-31,Garlic Naan,Breads,79,1,79
+2024-05-20,Garlic Naan,Breads,72,4,288
+2024-06-03,Spring Rolls,Starters,331,4,1324
+2024-04-11,Chole Bhature,Main Course,345,2,690
+2024-01-25,Samosa,Snacks,111,3,333
+2024-06-24,Cold Coffee,Beverages,240,4,960
+2024-03-23,Garlic Naan,Breads,380,5,1900
+2024-04-21,Manchurian,Starters,228,4,912
+2024-01-28,Paneer Butter Masala,Main Course,250,2,500
+2024-01-13,Garlic Naan,Breads,386,3,1158
+2024-02-11,Veg Biryani,Rice,174,2,348
+2024-03-18,Fried Rice,Rice,327,5,1635
+2024-02-25,Paneer Butter Masala,Main Course,288,5,1440
+2024-03-09,Tea,Beverages,85,4,340
+2024-05-09,Masala Dosa,South Indian,395,2,790
+2024-03-24,Masala Dosa,South Indian,63,5,315
+2024-03-19,Spring Rolls,Starters,122,5,610
+2024-05-02,Spring Rolls,Starters,76,3,228
+2024-02-20,Cold Coffee,Beverages,357,5,1785
+2024-02-01,Cold Coffee,Beverages,127,5,635
+2024-04-18,Cold Coffee,Beverages,178,5,890
+2024-02-26,Butter Naan,Breads,322,2,644
+2024-04-14,Garlic Naan,Breads,135,2,270
+2024-05-27,Chole Bhature,Main Course,274,5,1370
+2024-03-24,Masala Dosa,South Indian,234,2,468
+2024-02-01,Cold Coffee,Beverages,164,3,492
+2024-06-01,Masala Dosa,South Indian,50,4,200
+2024-05-17,Kadhai Paneer,Main Course,250,1,250
+2024-03-03,Masala Dosa,South Indian,386,1,386
+2024-06-28,Tea,Beverages,284,4,1136
+2024-05-16,Masala Dosa,South Indian,58,3,174
+2024-05-09,Masala Dosa,South Indian,190,5,950
+2024-03-13,Butter Naan,Breads,59,5,295
+2024-06-14,Butter Naan,Breads,120,2,240
+2024-05-04,Kadhai Paneer,Main Course,370,5,1850
+2024-06-10,Tea,Beverages,291,3,873
+2024-06-28,Veg Biryani,Rice,320,1,320
+2024-01-23,Tea,Beverages,139,3,417
+2024-03-14,Spring Rolls,Starters,349,1,349
+2024-02-04,Masala Dosa,South Indian,155,2,310
+2024-04-10,Veg Biryani,Rice,245,5,1225
+2024-01-05,Chole Bhature,Main Course,124,3,372
+2024-02-22,Chole Bhature,Main Course,386,1,386
+2024-03-30,Masala Dosa,South Indian,246,2,492
+2024-04-11,Fried Rice,Rice,314,2,628
+2024-02-22,Kadhai Paneer,Main Course,343,1,343
+2024-01-22,Spring Rolls,Starters,159,4,636
+2024-06-05,Cold Coffee,Beverages,325,3,975
+2024-02-03,Tea,Beverages,347,4,1388
+2024-05-27,Tea,Beverages,108,4,432
+2024-04-11,Samosa,Snacks,226,1,226
+2024-05-03,Paneer Butter Masala,Main Course,103,2,206
+2024-06-06,Spring Rolls,Starters,329,5,1645
+2024-03-13,Paneer Butter Masala,Main Course,299,3,897
+2024-06-19,Paneer Butter Masala,Main Course,147,3,441
+2024-01-12,Butter Naan,Breads,78,5,390
+2024-03-06,Tea,Beverages,394,1,394
+2024-05-12,Cold Coffee,Beverages,86,4,344
+2024-04-19,Paneer Butter Masala,Main Course,113,4,452
+2024-04-15,Chole Bhature,Main Course,82,1,82
+2024-04-26,Kadhai Paneer,Main Course,307,4,1228
+2024-03-17,Samosa,Snacks,182,2,364
+2024-01-16,Paneer Butter Masala,Main Course,396,5,1980
+2024-05-30,Manchurian,Starters,226,5,1130
+2024-03-27,Cold Coffee,Beverages,70,2,140
+2024-01-24,Butter Naan,Breads,386,5,1930
+2024-04-02,Idli,South Indian,240,1,240
+2024-02-23,Cold Coffee,Beverages,212,2,424
+2024-05-13,Samosa,Snacks,83,3,249
+2024-06-13,Spring Rolls,Starters,245,4,980
+2024-04-06,Veg Biryani,Rice,252,1,252
+2024-03-19,Kadhai Paneer,Main Course,74,5,370
+2024-03-31,Veg Biryani,Rice,394,1,394
+2024-01-20,Fried Rice,Rice,318,4,1272
+2024-04-14,Kadhai Paneer,Main Course,93,2,186
+2024-06-27,Fried Rice,Rice,333,3,999
+2024-01-08,Garlic Naan,Breads,261,2,522
+2024-05-22,Fried Rice,Rice,124,3,372
+2024-06-13,Coffee,Beverages,321,5,1605
+2024-03-19,Spring Rolls,Starters,82,5,410
+2024-04-10,Tea,Beverages,51,4,204
+2024-01-11,Idli,South Indian,271,3,813
+2024-03-03,Paneer Butter Masala,Main Course,296,4,1184
+2024-01-21,Tea,Beverages,83,4,332
+2024-03-25,Paneer Butter Masala,Main Course,70,5,350
+2024-06-19,Samosa,Snacks,53,5,265
+2024-04-08,Tea,Beverages,247,5,1235
+2024-03-21,Chole Bhature,Main Course,235,1,235
+2024-06-26,Tea,Beverages,362,2,724
+2024-06-09,Kadhai Paneer,Main Course,242,5,1210
+2024-04-08,Idli,South Indian,97,1,97
+2024-02-07,Tea,Beverages,209,5,1045
+2024-02-15,Spring Rolls,Starters,250,3,750
+2024-01-29,Manchurian,Starters,216,3,648
+2024-04-25,Tea,Beverages,334,3,1002
+2024-03-03,Masala Dosa,South Indian,178,5,890
+2024-05-16,Tea,Beverages,62,2,124
+2024-03-31,Paneer Butter Masala,Main Course,309,5,1545
+2024-03-29,Butter Naan,Breads,377,2,754
+2024-01-03,Masala Dosa,South Indian,280,5,1400
+2024-02-23,Paneer Butter Masala,Main Course,237,5,1185
+2024-05-25,Paneer Butter Masala,Main Course,247,3,741
+2024-04-19,Coffee,Beverages,347,3,1041
+2024-04-18,Tea,Beverages,97,3,291
+2024-02-08,Cold Coffee,Beverages,105,1,105
+2024-03-30,Butter Naan,Breads,303,4,1212
+2024-03-14,Cold Coffee,Beverages,328,1,328
+2024-06-02,Masala Dosa,South Indian,340,3,1020
+2024-03-03,Fried Rice,Rice,111,1,111
+2024-02-13,Samosa,Snacks,378,1,378
+2024-06-24,Kadhai Paneer,Main Course,56,5,280
+2024-04-24,Samosa,Snacks,213,3,639
+2024-02-23,Masala Dosa,South Indian,372,5,1860
+2024-04-28,Spring Rolls,Starters,259,3,777
+2024-02-24,Cold Coffee,Beverages,305,3,915
+2024-04-15,Butter Naan,Breads,282,3,846
+2024-01-17,Paneer Butter Masala,Main Course,78,5,390
+2024-03-07,Chole Bhature,Main Course,277,4,1108
+2024-03-05,Veg Biryani,Rice,55,5,275
+2024-05-18,Manchurian,Starters,288,2,576
+2024-06-12,Spring Rolls,Starters,123,3,369
+2024-01-05,Spring Rolls,Starters,135,4,540
+2024-01-25,Fried Rice,Rice,393,5,1965
+2024-04-05,Masala Dosa,South Indian,110,4,440
+2024-04-12,Coffee,Beverages,80,5,400
+2024-04-08,Samosa,Snacks,201,4,804
+2024-05-05,Butter Naan,Breads,368,2,736
+2024-03-22,Butter Naan,Breads,130,2,260
+2024-03-21,Butter Naan,Breads,132,2,264
+2024-03-12,Garlic Naan,Breads,137,5,685
+2024-02-02,Idli,South Indian,374,2,748
+2024-03-30,Fried Rice,Rice,392,3,1176
+2024-05-26,Idli,South Indian,55,5,275
+2024-03-13,Idli,South Indian,375,2,750
+2024-05-31,Coffee,Beverages,194,2,388
+2024-03-03,Tea,Beverages,197,5,985
+2024-01-09,Tea,Beverages,201,1,201
+2024-04-17,Veg Biryani,Rice,144,5,720
+2024-01-08,Chole Bhature,Main Course,175,1,175
+2024-02-22,Tea,Beverages,292,2,584
+2024-03-21,Chole Bhature,Main Course,216,5,1080
+2024-06-02,Butter Naan,Breads,337,2,674
+2024-02-21,Masala Dosa,South Indian,165,2,330
+2024-01-06,Cold Coffee,Beverages,185,4,740
+2024-04-21,Paneer Butter Masala,Main Course,384,2,768
+2024-04-13,Cold Coffee,Beverages,230,5,1150
+2024-06-01,Idli,South Indian,261,4,1044
+2024-06-12,Manchurian,Starters,195,3,585
+2024-01-12,Tea,Beverages,392,5,1960
+2024-01-07,Chole Bhature,Main Course,68,3,204
+2024-06-29,Masala Dosa,South Indian,379,4,1516
+2024-04-06,Cold Coffee,Beverages,158,1,158
+2024-01-11,Idli,South Indian,378,1,378
+2024-04-26,Veg Biryani,Rice,375,1,375
+2024-01-23,Idli,South Indian,337,1,337
+2024-01-01,Masala Dosa,South Indian,77,1,77
+2024-06-16,Chole Bhature,Main Course,111,2,222
+2024-03-26,Masala Dosa,South Indian,192,3,576
+2024-01-19,Cold Coffee,Beverages,366,2,732
+2024-03-21,Garlic Naan,Breads,281,2,562
+2024-06-16,Cold Coffee,Beverages,303,5,1515
+2024-01-08,Coffee,Beverages,232,1,232
+2024-05-08,Kadhai Paneer,Main Course,371,2,742
+2024-04-07,Kadhai Paneer,Main Course,173,3,519
+2024-05-11,Masala Dosa,South Indian,327,1,327
+2024-05-09,Kadhai Paneer,Main Course,145,4,580
+2024-01-05,Tea,Beverages,169,4,676
+2024-03-15,Idli,South Indian,100,5,500
+2024-04-14,Cold Coffee,Beverages,395,3,1185
+2024-02-05,Cold Coffee,Beverages,69,5,345
+2024-01-14,Masala Dosa,South Indian,180,3,540
+2024-05-11,Veg Biryani,Rice,309,1,309
+2024-04-10,Spring Rolls,Starters,390,5,1950
+2024-02-17,Chole Bhature,Main Course,275,2,550
+2024-03-24,Fried Rice,Rice,342,3,1026
+2024-02-05,Spring Rolls,Starters,341,2,682
+2024-03-25,Manchurian,Starters,386,1,386
+2024-03-24,Garlic Naan,Breads,258,4,1032
+2024-05-23,Chole Bhature,Main Course,77,4,308
+2024-02-11,Cold Coffee,Beverages,270,1,270
+2024-06-10,Cold Coffee,Beverages,268,5,1340
+2024-03-10,Paneer Butter Masala,Main Course,131,5,655
+2024-06-23,Butter Naan,Breads,246,2,492
+2024-02-19,Fried Rice,Rice,338,1,338
+2024-02-28,Coffee,Beverages,218,1,218
+2024-02-07,Coffee,Beverages,340,5,1700
+2024-05-04,Butter Naan,Breads,58,3,174
+2024-06-06,Spring Rolls,Starters,311,3,933
+2024-04-07,Samosa,Snacks,149,3,447
+2024-05-31,Idli,South Indian,351,5,1755
+2024-03-24,Chole Bhature,Main Course,74,5,370
+2024-06-06,Masala Dosa,South Indian,264,4,1056
+2024-02-14,Kadhai Paneer,Main Course,131,4,524
+2024-05-25,Coffee,Beverages,290,5,1450
+2024-05-10,Veg Biryani,Rice,104,3,312
+2024-05-02,Fried Rice,Rice,259,1,259
+2024-03-03,Tea,Beverages,73,2,146
+2024-04-27,Samosa,Snacks,120,2,240
+2024-01-13,Paneer Butter Masala,Main Course,328,1,328
+2024-02-13,Garlic Naan,Breads,375,3,1125
+2024-06-08,Masala Dosa,South Indian,380,1,380
+2024-01-12,Manchurian,Starters,371,5,1855
+2024-06-25,Chole Bhature,Main Course,281,2,562
+2024-03-05,Idli,South Indian,386,4,1544
+2024-04-07,Cold Coffee,Beverages,135,1,135
+2024-01-01,Cold Coffee,Beverages,201,5,1005
+2024-05-13,Idli,South Indian,290,4,1160
+2024-05-27,Tea,Beverages,261,1,261
+2024-03-26,Masala Dosa,South Indian,205,2,410
+2024-03-27,Idli,South Indian,392,5,1960
+2024-05-22,Samosa,Snacks,205,4,820
+2024-01-11,Kadhai Paneer,Main Course,75,2,150
+2024-05-17,Tea,Beverages,187,5,935
+2024-02-20,Fried Rice,Rice,178,4,712
+2024-04-15,Spring Rolls,Starters,92,1,92
+2024-03-30,Cold Coffee,Beverages,330,1,330
+2024-01-28,Kadhai Paneer,Main Course,90,3,270
+2024-03-24,Veg Biryani,Rice,209,1,209
+2024-04-24,Coffee,Beverages,328,3,984
+2024-05-18,Idli,South Indian,229,2,458
+2024-03-17,Cold Coffee,Beverages,264,1,264
+2024-04-06,Cold Coffee,Beverages,307,2,614
+2024-05-25,Paneer Butter Masala,Main Course,292,4,1168
+2024-06-07,Spring Rolls,Starters,214,1,214
+2024-05-28,Spring Rolls,Starters,68,1,68
+2024-03-29,Samosa,Snacks,133,2,266
+2024-01-25,Veg Biryani,Rice,91,3,273
+2024-05-04,Fried Rice,Rice,53,3,159
+2024-01-20,Veg Biryani,Rice,392,2,784
+2024-03-06,Kadhai Paneer,Main Course,378,1,378
+2024-06-07,Spring Rolls,Starters,387,5,1935
+2024-01-07,Spring Rolls,Starters,178,2,356
+2024-05-23,Spring Rolls,Starters,302,1,302
+2024-05-11,Veg Biryani,Rice,326,5,1630
+2024-02-18,Garlic Naan,Breads,338,5,1690
+2024-04-13,Paneer Butter Masala,Main Course,299,2,598
+2024-01-27,Manchurian,Starters,131,5,655
+2024-03-21,Samosa,Snacks,369,4,1476
+2024-05-24,Idli,South Indian,368,5,1840
+2024-01-16,Manchurian,Starters,297,4,1188
+2024-01-03,Kadhai Paneer,Main Course,96,5,480
+2024-04-15,Tea,Beverages,113,5,565
+2024-03-03,Manchurian,Starters,113,2,226
+2024-04-10,Fried Rice,Rice,334,3,1002
+2024-03-05,Garlic Naan,Breads,320,3,960
+2024-05-08,Butter Naan,Breads,327,2,654
+2024-06-04,Tea,Beverages,269,5,1345
+2024-06-13,Masala Dosa,South Indian,340,5,1700
+2024-01-22,Veg Biryani,Rice,204,4,816
+2024-02-23,Chole Bhature,Main Course,197,4,788
+2024-06-25,Veg Biryani,Rice,253,3,759
+2024-01-14,Tea,Beverages,395,1,395
+2024-03-01,Chole Bhature,Main Course,332,1,332
+2024-01-06,Chole Bhature,Main Course,143,4,572
+2024-04-29,Butter Naan,Breads,88,4,352
+2024-03-02,Fried Rice,Rice,398,3,1194
+2024-04-07,Butter Naan,Breads,176,4,704
+2024-05-24,Masala Dosa,South Indian,377,5,1885
+2024-02-28,Butter Naan,Breads,281,3,843
+2024-01-14,Cold Coffee,Beverages,121,2,242
+2024-02-24,Kadhai Paneer,Main Course,165,1,165
+2024-05-03,Idli,South Indian,346,5,1730
+2024-03-20,Tea,Beverages,234,3,702
+2024-05-23,Fried Rice,Rice,114,1,114
+2024-03-31,Cold Coffee,Beverages,168,3,504
+2024-04-10,Kadhai Paneer,Main Course,318,2,636
+2024-03-22,Garlic Naan,Breads,211,1,211
+2024-01-08,Kadhai Paneer,Main Course,338,3,1014
+2024-01-01,Veg Biryani,Rice,57,3,171
+2024-03-14,Kadhai Paneer,Main Course,360,1,360
+2024-01-21,Coffee,Beverages,226,3,678
+2024-04-14,Fried Rice,Rice,87,3,261
+2024-06-29,Masala Dosa,South Indian,244,1,244
+2024-06-15,Samosa,Snacks,218,3,654
+2024-02-25,Samosa,Snacks,215,4,860
+2024-06-16,Kadhai Paneer,Main Course,161,2,322
+2024-02-08,Samosa,Snacks,75,1,75
+2024-01-17,Kadhai Paneer,Main Course,232,4,928
+2024-02-15,Samosa,Snacks,89,4,356
+2024-05-12,Coffee,Beverages,102,3,306
+2024-05-16,Kadhai Paneer,Main Course,322,1,322
+2024-03-11,Masala Dosa,South Indian,145,5,725
+2024-01-08,Paneer Butter Masala,Main Course,223,1,223
+2024-03-09,Samosa,Snacks,134,3,402
+2024-01-04,Cold Coffee,Beverages,376,4,1504
+2024-05-17,Garlic Naan,Breads,184,3,552
+2024-05-06,Spring Rolls,Starters,302,3,906
+2024-01-20,Cold Coffee,Beverages,51,1,51
+2024-06-21,Paneer Butter Masala,Main Course,179,1,179
+2024-06-10,Samosa,Snacks,113,2,226
+2024-04-26,Samosa,Snacks,133,1,133
+2024-02-14,Fried Rice,Rice,143,2,286
+2024-01-30,Fried Rice,Rice,281,4,1124
+2024-04-07,Fried Rice,Rice,188,1,188
+2024-06-15,Cold Coffee,Beverages,62,5,310
+2024-05-08,Coffee,Beverages,372,5,1860
+2024-01-13,Cold Coffee,Beverages,85,2,170
+2024-04-24,Samosa,Snacks,108,5,540
+2024-01-11,Coffee,Beverages,278,3,834
+2024-01-26,Tea,Beverages,93,3,279
+2024-03-30,Cold Coffee,Beverages,232,4,928
+2024-01-03,Cold Coffee,Beverages,68,4,272
+2024-04-29,Paneer Butter Masala,Main Course,90,4,360
+2024-06-08,Butter Naan,Breads,90,5,450
+2024-03-13,Masala Dosa,South Indian,354,4,1416
+2024-01-21,Butter Naan,Breads,73,5,365
+2024-02-14,Idli,South Indian,317,3,951
+2024-02-17,Idli,South Indian,356,2,712
+2024-02-20,Veg Biryani,Rice,209,4,836
+2024-05-01,Cold Coffee,Beverages,250,2,500
+2024-02-05,Butter Naan,Breads,62,2,124
+2024-04-27,Masala Dosa,South Indian,83,2,166
+2024-01-06,Veg Biryani,Rice,252,5,1260
+2024-03-26,Coffee,Beverages,275,1,275
+2024-01-25,Kadhai Paneer,Main Course,176,2,352
+2024-06-05,Manchurian,Starters,116,2,232
+2024-03-19,Cold Coffee,Beverages,169,3,507
+2024-06-17,Masala Dosa,South Indian,203,1,203
+2024-04-26,Paneer Butter Masala,Main Course,182,3,546
+2024-01-31,Coffee,Beverages,354,1,354
+2024-03-24,Cold Coffee,Beverages,266,5,1330
+2024-04-18,Coffee,Beverages,204,2,408
+2024-06-01,Idli,South Indian,55,5,275
+2024-04-13,Paneer Butter Masala,Main Course,346,2,692
+2024-06-16,Fried Rice,Rice,96,3,288
+2024-01-08,Tea,Beverages,140,4,560
+2024-03-20,Tea,Beverages,391,5,1955
+2024-03-28,Garlic Naan,Breads,143,5,715
+2024-05-09,Paneer Butter Masala,Main Course,263,5,1315
+2024-02-13,Tea,Beverages,203,4,812
+2024-05-31,Coffee,Beverages,111,1,111
+2024-06-15,Manchurian,Starters,211,5,1055
+2024-05-17,Idli,South Indian,251,1,251
+2024-04-14,Tea,Beverages,189,2,378
+2024-05-19,Kadhai Paneer,Main Course,308,2,616
+2024-01-16,Spring Rolls,Starters,134,1,134
+2024-06-03,Chole Bhature,Main Course,192,2,384
+2024-04-17,Garlic Naan,Breads,107,3,321
+2024-03-25,Veg Biryani,Rice,72,5,360
+2024-05-19,Tea,Beverages,100,5,500
+2024-05-21,Fried Rice,Rice,128,4,512
+2024-03-28,Butter Naan,Breads,119,4,476
+2024-03-03,Kadhai Paneer,Main Course,321,5,1605
+2024-03-25,Spring Rolls,Starters,369,4,1476
+2024-06-18,Spring Rolls,Starters,299,4,1196
+2024-06-28,Butter Naan,Breads,255,1,255
+2024-01-08,Kadhai Paneer,Main Course,325,5,1625
+2024-03-18,Idli,South Indian,158,4,632
+2024-05-02,Tea,Beverages,365,1,365
+2024-05-29,Manchurian,Starters,102,2,204
+2024-03-27,Spring Rolls,Starters,253,4,1012
+2024-04-29,Masala Dosa,South Indian,130,1,130
+2024-01-15,Spring Rolls,Starters,304,1,304
+2024-06-15,Spring Rolls,Starters,294,2,588
+2024-03-31,Spring Rolls,Starters,143,2,286
+2024-06-23,Kadhai Paneer,Main Course,353,2,706
+2024-05-20,Garlic Naan,Breads,82,5,410
+2024-03-27,Masala Dosa,South Indian,155,4,620
+2024-04-21,Butter Naan,Breads,358,2,716
+2024-03-07,Spring Rolls,Starters,242,2,484
+2024-01-27,Fried Rice,Rice,118,2,236
+2024-01-04,Garlic Naan,Breads,258,5,1290
+2024-04-02,Samosa,Snacks,72,2,144
+2024-02-03,Veg Biryani,Rice,307,3,921
+2024-01-28,Fried Rice,Rice,66,3,198
+2024-03-29,Garlic Naan,Breads,137,1,137
+2024-03-17,Spring Rolls,Starters,62,2,124
+2024-01-03,Veg Biryani,Rice,271,2,542
+2024-01-03,Chole Bhature,Main Course,210,2,420
+2024-04-10,Kadhai Paneer,Main Course,118,4,472
+2024-04-10,Kadhai Paneer,Main Course,139,4,556
+2024-02-11,Paneer Butter Masala,Main Course,209,1,209
+2024-02-01,Paneer Butter Masala,Main Course,234,2,468
+2024-01-15,Masala Dosa,South Indian,354,1,354
+2024-05-18,Butter Naan,Breads,252,1,252
+2024-04-22,Fried Rice,Rice,311,2,622
+2024-06-04,Samosa,Snacks,392,5,1960
+2024-01-29,Chole Bhature,Main Course,112,1,112
+2024-05-16,Coffee,Beverages,82,4,328
+2024-03-12,Manchurian,Starters,234,3,702
+2024-02-15,Butter Naan,Breads,348,5,1740
+2024-04-08,Paneer Butter Masala,Main Course,291,5,1455
+2024-05-03,Butter Naan,Breads,147,2,294
+2024-06-16,Masala Dosa,South Indian,261,5,1305
+2024-02-18,Manchurian,Starters,134,4,536
+2024-04-25,Spring Rolls,Starters,285,4,1140
+2024-03-22,Butter Naan,Breads,395,3,1185
+2024-01-01,Cold Coffee,Beverages,252,2,504
+2024-02-21,Idli,South Indian,145,3,435
+2024-01-05,Manchurian,Starters,82,5,410
+2024-04-10,Butter Naan,Breads,252,3,756
+2024-05-11,Veg Biryani,Rice,126,5,630
+2024-04-18,Chole Bhature,Main Course,217,5,1085
+2024-04-29,Cold Coffee,Beverages,165,1,165
+2024-06-27,Tea,Beverages,110,1,110
+2024-05-15,Cold Coffee,Beverages,328,3,984
+2024-06-23,Kadhai Paneer,Main Course,349,4,1396
+2024-03-25,Samosa,Snacks,260,5,1300
+2024-04-14,Chole Bhature,Main Course,73,4,292
+2024-01-21,Garlic Naan,Breads,358,3,1074
+2024-05-31,Coffee,Beverages,178,1,178
+2024-04-28,Kadhai Paneer,Main Course,108,2,216
+2024-03-29,Chole Bhature,Main Course,216,2,432
+2024-04-23,Kadhai Paneer,Main Course,171,5,855
+2024-02-02,Tea,Beverages,390,2,780
+2024-04-23,Butter Naan,Breads,327,3,981
+2024-06-19,Idli,South Indian,388,1,388
+2024-02-19,Garlic Naan,Breads,189,2,378
+2024-03-06,Chole Bhature,Main Course,87,3,261
+2024-03-28,Kadhai Paneer,Main Course,395,2,790
+2024-05-15,Veg Biryani,Rice,331,5,1655
+2024-03-20,Cold Coffee,Beverages,242,3,726
+2024-03-12,Fried Rice,Rice,55,2,110
+2024-03-06,Tea,Beverages,355,5,1775
+2024-03-15,Coffee,Beverages,330,1,330
+2024-05-01,Butter Naan,Breads,55,4,220
+2024-04-01,Kadhai Paneer,Main Course,258,4,1032
+2024-05-07,Kadhai Paneer,Main Course,168,2,336
+2024-02-20,Samosa,Snacks,269,3,807
+2024-03-09,Chole Bhature,Main Course,87,3,261
+2024-03-26,Idli,South Indian,329,4,1316
+2024-02-09,Samosa,Snacks,323,3,969
+2024-06-24,Paneer Butter Masala,Main Course,398,3,1194
+2024-03-10,Butter Naan,Breads,351,5,1755
+2024-06-27,Tea,Beverages,215,3,645
+2024-03-15,Chole Bhature,Main Course,400,1,400
+2024-04-02,Fried Rice,Rice,289,5,1445
+2024-03-04,Coffee,Beverages,391,2,782
+2024-03-10,Tea,Beverages,71,2,142
+2024-05-18,Samosa,Snacks,140,5,700
+2024-05-12,Paneer Butter Masala,Main Course,84,5,420
+2024-06-19,Samosa,Snacks,368,4,1472
+2024-02-15,Kadhai Paneer,Main Course,63,3,189
+2024-01-03,Tea,Beverages,280,5,1400
+2024-03-01,Fried Rice,Rice,79,1,79
+2024-04-08,Masala Dosa,South Indian,355,4,1420
+2024-03-09,Coffee,Beverages,374,4,1496
+2024-05-15,Spring Rolls,Starters,371,3,1113
+2024-06-26,Samosa,Snacks,348,3,1044
+2024-04-16,Fried Rice,Rice,103,4,412
+2024-03-25,Masala Dosa,South Indian,94,2,188
+2024-04-24,Butter Naan,Breads,244,1,244
+2024-05-07,Paneer Butter Masala,Main Course,99,5,495
+2024-01-30,Masala Dosa,South Indian,263,4,1052
+2024-04-12,Spring Rolls,Starters,98,2,196
+2024-04-20,Paneer Butter Masala,Main Course,140,3,420
+2024-04-30,Manchurian,Starters,60,4,240
+2024-01-06,Coffee,Beverages,225,1,225
+2024-02-02,Chole Bhature,Main Course,351,5,1755
+2024-05-21,Garlic Naan,Breads,179,3,537
+2024-03-16,Masala Dosa,South Indian,52,1,52
+2024-03-10,Cold Coffee,Beverages,92,2,184
+2024-05-22,Garlic Naan,Breads,334,3,1002
+2024-06-16,Kadhai Paneer,Main Course,365,1,365
+2024-04-04,Paneer Butter Masala,Main Course,82,2,164
+2024-05-23,Masala Dosa,South Indian,264,4,1056
+2024-04-23,Tea,Beverages,280,2,560
+2024-02-06,Tea,Beverages,249,3,747
+2024-02-24,Garlic Naan,Breads,343,4,1372
+2024-06-23,Coffee,Beverages,333,5,1665
+2024-06-06,Idli,South Indian,394,5,1970
+2024-05-28,Fried Rice,Rice,164,3,492
+2024-01-05,Samosa,Snacks,212,3,636
+2024-04-08,Spring Rolls,Starters,273,3,819
+2024-03-01,Butter Naan,Breads,243,2,486
+2024-05-17,Idli,South Indian,260,2,520
+2024-01-24,Veg Biryani,Rice,174,1,174
+2024-04-02,Coffee,Beverages,261,3,783
+2024-02-07,Spring Rolls,Starters,178,5,890
+2024-04-12,Spring Rolls,Starters,261,3,783
+2024-04-16,Masala Dosa,South Indian,113,2,226
+2024-02-08,Garlic Naan,Breads,187,3,561
+2024-05-03,Garlic Naan,Breads,372,1,372
+2024-02-17,Cold Coffee,Beverages,360,1,360
+2024-03-27,Chole Bhature,Main Course,297,3,891
+2024-06-18,Tea,Beverages,114,4,456
+2024-01-24,Veg Biryani,Rice,86,5,430
+2024-02-25,Spring Rolls,Starters,97,2,194
+2024-06-29,Garlic Naan,Breads,224,2,448
+2024-04-07,Fried Rice,Rice,178,2,356
+2024-06-22,Masala Dosa,South Indian,237,3,711
+2024-01-29,Idli,South Indian,99,2,198
+2024-03-29,Cold Coffee,Beverages,380,3,1140
+2024-02-13,Cold Coffee,Beverages,365,3,1095
+2024-04-26,Masala Dosa,South Indian,159,2,318
+2024-04-30,Butter Naan,Breads,268,3,804
+2024-02-24,Kadhai Paneer,Main Course,178,2,356
+2024-01-20,Tea,Beverages,209,1,209
+2024-06-20,Coffee,Beverages,169,5,845
+2024-06-09,Garlic Naan,Breads,266,2,532
+2024-04-06,Fried Rice,Rice,377,3,1131
+2024-03-03,Veg Biryani,Rice,154,2,308
+2024-06-26,Chole Bhature,Main Course,337,4,1348
+2024-04-06,Chole Bhature,Main Course,365,1,365
+2024-02-24,Chole Bhature,Main Course,230,3,690
+2024-06-17,Idli,South Indian,244,2,488
