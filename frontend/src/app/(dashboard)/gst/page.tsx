@@ -109,7 +109,7 @@ export default function GSTSummaryPage() {
                 <RechartsTooltip 
                   contentStyle={{ backgroundColor: '#0E0F13', borderColor: '#1f2937' }} 
                   itemStyle={{ color: '#fff' }}
-                  formatter={(value: number) => `₹${value.toLocaleString()}`}
+                  formatter={(value: any) => `₹${Number(value).toLocaleString()}`}
                 />
               </PieChart>
             </ResponsiveContainer>
