@@ -128,6 +128,18 @@ def get_inventory_list(user_id: str, db: Session = Depends(get_db)):
         mapped = []
         now_dt = datetime.datetime.now(datetime.timezone.utc)
         
+        # Pre-fetch recent sales to calculate velocity
+        thirty_days_ago = (now_dt - datetime.timedelta(days=30)).isoformat()
+        try:
+            sales_res = supabase.table("sales_data").select("product, quantity").eq("user_id", user_id).gte("date", thirty_days_ago).execute()
+        except:
+            sales_res = type('obj', (object,), {'data': []})()
+
+        velocity_map = {}
+        for sale in getattr(sales_res, 'data', []):
+           prod_name = sale.get("product")
+           velocity_map[prod_name] = velocity_map.get(prod_name, 0) + int(sale.get("quantity", 0))
+
         for p in products:
             days_inactive = 0
             wac = p.price
@@ -146,6 +158,13 @@ def get_inventory_list(user_id: str, db: Session = Depends(get_db)):
                         log_date = log_date.replace(tzinfo=datetime.timezone.utc)
                     days_inactive = (now_dt - log_date).days
 
+            # Calculate Daily Velocity & Runway
+            daily_velocity = velocity_map.get(p.name, 0) / 30.0
+            if daily_velocity > 0:
+                runway_days = int(p.quantity / daily_velocity)
+            else:
+                runway_days = 999 
+
             mapped.append({
                 "name": p.name,
                 "category": p.category,
@@ -154,7 +173,9 @@ def get_inventory_list(user_id: str, db: Session = Depends(get_db)):
                 "stock_quantity": p.quantity,
                 "sku": p.sku,
                 "reorder_level": p.reorder_level if hasattr(p, 'reorder_level') and p.reorder_level is not None else 5,
-                "days_inactive": days_inactive
+                "days_inactive": days_inactive,
+                "daily_velocity": round(daily_velocity, 2),
+                "runway_days": runway_days
             })
         return mapped
     except Exception as e:

@@ -8,8 +8,10 @@ import uuid
 from config.clients import supabase
 from database import get_db
 from models.product import Product
+from models.liquidity import Wallet
 from profit_engine.models import InventoryLog
 from profit_engine.schemas import AdvancedProductInput, AdvancedTransactionInput
+from liquidity_engine.service import calculate_liquidity_status
 
 router = APIRouter()
 @router.get("/v2/products/{user_id}/{barcode}")
@@ -46,6 +48,14 @@ def get_product_v2(user_id: str, barcode: str, db: Session = Depends(get_db)):
 def add_inventory_v2(data: AdvancedProductInput, db: Session = Depends(get_db)):
     """Log inventory with specific cost price for profit tracking."""
     try:
+        total_cost = data.cost_price * data.stock_quantity
+        
+        # Check Liquidity before allowing purchase
+        liquidity = calculate_liquidity_status(db, data.user_id)
+        current_liq = liquidity.get("current_liquidity", 0) if "error" not in liquidity else 0
+        if total_cost > current_liq:
+            raise HTTPException(status_code=400, detail=f"Insufficient liquidity! Required: ₹{total_cost}, Available: ₹{current_liq}")
+
         product = db.query(Product).filter(Product.sku == data.barcode, Product.user_id == data.user_id).first()
         
         if not product:
@@ -72,6 +82,13 @@ def add_inventory_v2(data: AdvancedProductInput, db: Session = Depends(get_db)):
             quantity_added=data.stock_quantity
         )
         db.add(new_log)
+        
+        # Deduct Cost Price from Liquidity Wallet
+        total_cost = data.cost_price * data.stock_quantity
+        wallet = db.query(Wallet).filter(Wallet.user_id == data.user_id).first()
+        if wallet and total_cost > 0:
+             wallet.starting_capital -= total_cost
+             
         db.commit()
         return {"message": "Inventory batch logged successfully", "new_total": product.quantity}
     except Exception as e:
@@ -123,6 +140,11 @@ def process_checkout_v2(data: AdvancedTransactionInput, db: Session = Depends(ge
             # Fallback if custom columns missing
             supabase.table("sales_data").insert({k:v for k,v in sale_payload.items() if k not in ['cost_price', 'true_profit']}).execute()
 
+        # Add Selling Price Revenue to Liquidity Wallet
+        wallet = db.query(Wallet).filter(Wallet.user_id == data.user_id).first()
+        if wallet and revenue > 0:
+             wallet.starting_capital += revenue
+
         db.commit()
         return {"message": "Sale completed", "revenue": revenue, "profit": profit}
     except Exception as e:
@@ -148,9 +170,14 @@ async def bulk_receive_stock_v2(user_id: str = Form(...), file: UploadFile = Fil
     if df.empty:
         raise HTTPException(status_code=400, detail="Empty CSV")
         
+    # Pre-fetch liquidity
+    liquidity = calculate_liquidity_status(db, user_id)
+    current_liq = liquidity.get("current_liquidity", 0) if "error" not in liquidity else 0
+        
     added = 0
     errors = 0
-    for _, row in df.iterrows():
+    failed_items = []
+    for idx, row in df.iterrows():
         try:
             product_name = str(row.get("Product", "")).strip()
             if not product_name or product_name.lower() == "nan":
@@ -170,6 +197,12 @@ async def bulk_receive_stock_v2(user_id: str = Form(...), file: UploadFile = Fil
             if pd.isna(qty_raw) or str(qty_raw).strip() == "":
                 raise ValueError("Quantity missing")
             qty = int(qty_raw)
+            
+            total_cost = cost_price * qty
+            if total_cost > current_liq:
+                raise ValueError(f"Insufficient liquidity (Cost: ₹{total_cost}, Available: ₹{current_liq})")
+                
+            current_liq -= total_cost
 
             category = str(row.get("Category", "Uncategorized"))
             if category.lower() == "nan":
@@ -205,15 +238,22 @@ async def bulk_receive_stock_v2(user_id: str = Form(...), file: UploadFile = Fil
                 new_log.date_added = parsed_date
             db.add(new_log)
             added += 1
+            
+            # Deduct Bulk Receive Cost from Wallet
+            wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
+            if wallet:
+                wallet.starting_capital -= (cost_price * qty)
+                
         except Exception as e:
             errors += 1
-            print(f"Error processing row: {e}")
+            product_name_str = row.get("Product", f"Row {idx+1}")
+            failed_items.append(f"{product_name_str}: Failed ({str(e)})")
             continue
             
     db.commit()
     # Normalize numpy types for JSON serialization
     preview = df.head(10).fillna("").to_dict(orient="records")
-    return {"message": "Success", "details": f"Received {added} items. Errors: {errors}", "preview": preview}
+    return {"message": "Success", "details": f"Received {added} items. Errors: {errors}", "preview": preview, "failed_items": failed_items}
 
 @router.post("/v2/upload/checkout")
 async def bulk_checkout_v2(user_id: str = Form(...), file: UploadFile = File(...), db: Session = Depends(get_db)):
@@ -319,6 +359,11 @@ async def bulk_checkout_v2(user_id: str = Form(...), file: UploadFile = File(...
                     supabase.table("sales_data").insert(sale_payload).execute()
                 else:
                     raise filter_e
+                    
+            # Add Bulk Sale Revenue to Wallet
+            wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
+            if wallet:
+                wallet.starting_capital += revenue
                     
             processed += 1
         except Exception as e:
