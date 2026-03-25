@@ -10,10 +10,13 @@ import uuid
 from database import Base
 
 
+from sqlalchemy.dialects.postgresql import UUID as PG_UUID
+import uuid
+
 class Product(Base):
     __tablename__ = "products"
 
-    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    id = Column(PG_UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     user_id = Column(String, ForeignKey("users.id"), nullable=False, index=True)
     name = Column(String, nullable=False)
     category = Column(String, nullable=True)
