@@ -44,6 +44,12 @@ export default function DashboardPage() {
     userId ? `${getApiUrl()}/analytics?user_id=${userId}&range=${range}` : null,
     fetcher
   );
+
+  const { data: liqStatus } = useSWR(
+    userId ? `http://localhost:8000/liquidity/status/${userId}` : null,
+    fetcher
+  );
+
   // Chatbot state
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -125,6 +131,26 @@ export default function DashboardPage() {
           <p className="text-muted-foreground text-sm font-medium">Real-time business trends and AI-driven growth analytics.</p>
         </div>
         <div className="flex items-center gap-3">
+             <AnimatePresence>
+                {liqStatus && (
+                   <motion.div 
+                     initial={{ opacity: 0, x: 20 }} 
+                     animate={{ opacity: 1, x: 0 }}
+                     className={cn(
+                       "flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-bold",
+                       liqStatus.status_token === "SAFE" ? "bg-green-500/10 border-green-500/20 text-green-600" :
+                       liqStatus.status_token === "WARNING" ? "bg-amber-500/10 border-amber-500/20 text-amber-600" :
+                       "bg-red-500/10 border-red-500/20 text-red-600"
+                     )}
+                   >
+                      <div className={cn("w-2 h-2 rounded-full", 
+                        liqStatus.status_token === "SAFE" ? "bg-green-500" : 
+                        liqStatus.status_token === "WARNING" ? "bg-amber-500" : "bg-red-500") 
+                      }/>
+                      {liqStatus.days_remaining === 999 ? "Liquidity: Safe (>30 days)" : `Runway: ${liqStatus.days_remaining} Days Remaining`}
+                   </motion.div>
+                )}
+             </AnimatePresence>
           <div className="flex bg-muted p-1 rounded-xl shadow-inner">
              {["Day", "Week", "Month"].map((t) => {
                 const tLower = t.toLowerCase();

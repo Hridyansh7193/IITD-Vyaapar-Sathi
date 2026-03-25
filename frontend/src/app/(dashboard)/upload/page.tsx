@@ -206,20 +206,20 @@ export default function UploadPage() {
                 </div>
 
                 <div className="mt-8 flex justify-end">
-                   <button 
+                  <button 
                     disabled={isUploading || uploadStatus === "success"}
                     onClick={handleUpload}
                     className="flex items-center px-8 py-3 bg-primary text-primary-foreground rounded-xl font-bold hover:shadow-lg disabled:opacity-50 transition-all"
-                   >
-                     {isUploading ? (
-                       <Loader2 className="w-5 h-5 mr-3 animate-spin" />
-                     ) : uploadStatus === "success" ? (
-                       <CheckCircle className="w-5 h-5 mr-3" />
-                     ) : (
-                       <ArrowRight className="w-5 h-5 mr-3" />
-                     )}
-                     {isUploading ? "Processing..." : uploadStatus === "success" ? "Success" : "Start Analysis"}
-                   </button>
+                  >
+                    {isUploading ? (
+                      <Loader2 className="w-5 h-5 mr-3 animate-spin" />
+                    ) : uploadStatus === "success" ? (
+                      <CheckCircle className="w-5 h-5 mr-3" />
+                    ) : (
+                      <ArrowRight className="w-5 h-5 mr-3" />
+                    )}
+                    {isUploading ? "Processing..." : uploadStatus === "success" ? "Success" : "Start Analysis"}
+                  </button>
                 </div>
               </motion.div>
             )}

@@ -17,7 +17,8 @@ import {
   Zap,
   ScanLine,
   Package,
-  LogOut
+  LogOut,
+  Wallet
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -30,6 +31,7 @@ const navItems = [
   { icon: TrendingUp, label: "Forecast", href: "/forecast" },
   { icon: Receipt, label: "GST", href: "/gst" },
   { icon: FileText, label: "Reports", href: "/reports" },
+  { icon: Wallet, label: "Liquidity", href: "/liquidity" },
   { icon: MessageSquare, label: "AI Assistant", href: "/assistant" },
 ];
 
