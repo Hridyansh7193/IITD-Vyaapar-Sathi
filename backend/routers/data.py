@@ -105,7 +105,7 @@ async def upload_sales(file: UploadFile = File(...), user_id: str = Form(...)):
 
 
 @router.get("/analytics")
-def get_analytics(user_id: str, range: str = "month"):
+async def get_analytics(user_id: str, range: str = "month"):
     """Returns analytics computed securely from the DB"""
     try:
         response = supabase.table("sales_data").select("*").eq("user_id", user_id).execute()

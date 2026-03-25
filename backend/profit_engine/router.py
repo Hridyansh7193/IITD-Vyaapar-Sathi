@@ -12,6 +12,122 @@ from profit_engine.models import InventoryLog
 from profit_engine.schemas import AdvancedProductInput, AdvancedTransactionInput
 
 router = APIRouter()
+@router.get("/v2/products/{user_id}/{barcode}")
+def get_product_v2(user_id: str, barcode: str, db: Session = Depends(get_db)):
+    """Lookup product with explicit cost awareness."""
+    try:
+        product = db.query(Product).filter(Product.sku == barcode, Product.user_id == user_id).first()
+        if not product:
+            return {"exists": False}
+        
+        # Calculate Average Cost from logs
+        all_logs = db.query(InventoryLog).filter(InventoryLog.barcode == barcode, InventoryLog.user_id == user_id).all()
+        avg_cost = 0.0
+        if all_logs:
+            total_cost = sum(log.cost_price * log.quantity_added for log in all_logs)
+            total_qty = sum(log.quantity_added for log in all_logs)
+            avg_cost = total_cost / total_qty if total_qty > 0 else 0.0
+
+        return {
+            "exists": True, 
+            "product": {
+                "name": product.name,
+                "category": product.category,
+                "selling_price": product.price,
+                "cost_price": round(avg_cost, 2),
+                "stock_quantity": product.quantity,
+                "barcode": product.sku
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/v2/inventory/add")
+def add_inventory_v2(data: AdvancedProductInput, db: Session = Depends(get_db)):
+    """Log inventory with specific cost price for profit tracking."""
+    try:
+        product = db.query(Product).filter(Product.sku == data.barcode, Product.user_id == data.user_id).first()
+        
+        if not product:
+            product = Product(
+                user_id=data.user_id,
+                name=data.name,
+                category=data.category,
+                price=data.selling_price,
+                quantity=data.stock_quantity,
+                sku=data.barcode
+            )
+            db.add(product)
+        else:
+            product.quantity += data.stock_quantity
+            if data.selling_price > 0: product.price = data.selling_price
+            if data.name: product.name = data.name
+
+        # Always log the specific batch cost
+        new_log = InventoryLog(
+            user_id=data.user_id,
+            barcode=data.barcode,
+            cost_price=data.cost_price,
+            selling_price=data.selling_price,
+            quantity_added=data.stock_quantity
+        )
+        db.add(new_log)
+        db.commit()
+        return {"message": "Inventory batch logged successfully", "new_total": product.quantity}
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.post("/v2/sales/checkout")
+def process_checkout_v2(data: AdvancedTransactionInput, db: Session = Depends(get_db)):
+    """Deduct stock and log sale to Supabase with TRUE profit calculation."""
+    try:
+        product = db.query(Product).filter(Product.sku == data.barcode, Product.user_id == data.user_id).first()
+        if not product:
+            raise HTTPException(status_code=404, detail="Product not found in inventory.")
+        
+        if product.quantity < data.quantity:
+             raise HTTPException(status_code=400, detail=f"Insufficient stock! Available: {product.quantity}")
+             
+        # 1. Deduct Stock
+        product.quantity -= data.quantity
+        if data.selling_price > 0:
+            product.price = data.selling_price
+        
+        # 2. Calculate average cost for THIS sale
+        all_logs = db.query(InventoryLog).filter(InventoryLog.barcode == product.sku, InventoryLog.user_id == data.user_id).all()
+        if all_logs:
+            total_avg_cost = sum(log.cost_price * log.quantity_added for log in all_logs) / sum(log.quantity_added for log in all_logs)
+        else:
+            total_avg_cost = 0.0
+
+        revenue = data.selling_price * data.quantity
+        profit = (data.selling_price - total_avg_cost) * data.quantity
+        
+        sale_payload = {
+            "user_id": data.user_id,
+            "product": product.name,
+            "category": product.category,
+            "price": data.selling_price,
+            "quantity": data.quantity,
+            "revenue": revenue,
+            "cost_price": round(total_avg_cost, 2),
+            "true_profit": round(profit, 2),
+            "date": datetime.datetime.now().isoformat()
+        }
+        
+        # 3. Log to Supabase for global analytics
+        try:
+            supabase.table("sales_data").insert(sale_payload).execute()
+        except:
+            # Fallback if custom columns missing
+            supabase.table("sales_data").insert({k:v for k,v in sale_payload.items() if k not in ['cost_price', 'true_profit']}).execute()
+
+        db.commit()
+        return {"message": "Sale completed", "revenue": revenue, "profit": profit}
+    except Exception as e:
+          db.rollback()
+          raise HTTPException(status_code=500, detail=str(e))
 
 
 
@@ -67,7 +183,6 @@ async def bulk_receive_stock_v2(user_id: str = Form(...), file: UploadFile = Fil
 
             if not product:
                 new_prod = Product(
-                    id=str(uuid.uuid4()),
                     user_id=user_id,
                     name=product_name,
                     category=category,

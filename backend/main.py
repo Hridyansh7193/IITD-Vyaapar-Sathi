@@ -70,7 +70,11 @@ app.add_middleware(
 @app.on_event("startup")
 def on_startup():
     """Creates DB tables on first run. Safe to call multiple times."""
-    init_db()
+    try:
+        init_db()
+    except Exception as e:
+        print(f"⚠️  WARNING: Database connection failed during startup: {e}")
+        print("Backend is still online, but DB-dependent features (analytics, auth) will fail.")
 
 
 # ── v1 API Routes (mobile-app ready, JWT-protected) ───────────────────────────
