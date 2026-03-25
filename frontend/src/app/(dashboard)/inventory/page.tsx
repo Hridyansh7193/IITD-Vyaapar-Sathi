@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 import { Package, Search, AlertCircle, Box, LayoutGrid } from "lucide-react";
+import { getApiUrl } from "@/lib/utils";
 
 type InventoryItem = {
   name: string;
@@ -29,7 +30,7 @@ export default function InventoryPage() {
           return;
         }
 
-        const res = await fetch(`http://localhost:8000/inventory/list/${data.user.id}`);
+        const res = await fetch(`${getApiUrl()}/inventory/list/${data.user.id}`);
         if (res.ok) {
           const json = await res.json();
           // Sort items alphabetically by default
@@ -60,7 +61,7 @@ export default function InventoryPage() {
     try {
         const supabase = createClient();
         const { data } = await supabase.auth.getUser();
-        await fetch(`http://localhost:8000/inventory/update-reorder`, {
+        await fetch(`${getApiUrl()}/inventory/update-reorder`, {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ sku: sku, user_id: data.user?.id, reorder_level: num })

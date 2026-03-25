@@ -12,6 +12,10 @@ Swagger UI: http://localhost:8000/docs
 ReDoc:      http://localhost:8000/redoc
 """
 
+import warnings
+# Silence google-generativeai deprecation warning early
+warnings.filterwarnings("ignore", message="All support for the `google.generativeai` package has ended.*")
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -117,10 +121,12 @@ def health():
 
 if __name__ == "__main__":
     import uvicorn
+    import os
+    port = int(os.getenv("PORT", 8000))
     uvicorn.run(
         "main:app",
         host="0.0.0.0",
-        port=8000,
-        reload=settings.DEBUG or True,
+        port=port,
+        reload=False,
         log_level="info",
     )

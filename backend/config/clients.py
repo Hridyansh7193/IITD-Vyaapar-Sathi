@@ -4,11 +4,12 @@ config/clients.py
 Singletons for external API clients: Supabase, OpenRouter (OpenAI), and Gemini.
 """
 
-from supabase import create_client
-from openai import OpenAI
 import warnings
 warnings.filterwarnings("ignore", message="All support for the `google.generativeai` package has ended.*")
+
 import google.generativeai as genai
+from supabase import create_client
+from openai import OpenAI
 from .settings import get_settings
 
 settings = get_settings()

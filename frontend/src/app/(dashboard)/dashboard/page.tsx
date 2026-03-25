@@ -22,7 +22,7 @@ import {
   ChevronRight
 } from "lucide-react";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
-import { cn } from "@/lib/utils";
+import { cn, getApiUrl } from "@/lib/utils";
 import useSWR from "swr";
 import { fetcher } from "@/lib/fetcher";
 import { toast } from "sonner";
@@ -41,7 +41,7 @@ export default function DashboardPage() {
   }, []);
 
   const { data, error, isLoading } = useSWR(
-    userId ? `http://localhost:8000/analytics?user_id=${userId}&range=${range}` : null,
+    userId ? `${getApiUrl()}/analytics?user_id=${userId}&range=${range}` : null,
     fetcher
   );
   // Chatbot state
@@ -72,7 +72,7 @@ export default function DashboardPage() {
         { role: "user", content: userQuery }
       ]);
 
-      const res = await fetch("http://localhost:8000/chat-query", {
+      const res = await fetch(`${getApiUrl()}/chat-query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

@@ -1,4 +1,5 @@
 "use client";
+import { getApiUrl } from "@/lib/utils";
 
 import { motion } from "framer-motion";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -19,7 +20,7 @@ export default function ForecastPage() {
   }, []);
 
   const { data, isLoading } = useSWR(
-    userId ? `http://localhost:8000/analytics?user_id=${userId}` : null,
+    userId ? `${getApiUrl()}/analytics?user_id=${userId}` : null,
     fetcher
   );
 

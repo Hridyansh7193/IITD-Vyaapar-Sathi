@@ -1,4 +1,5 @@
 "use client";
+import { getApiUrl } from "@/lib/utils";
 
 import { motion } from "framer-motion";
 import { TrendingUp, TrendingDown, Package, Star, Loader2, AlertCircle } from "lucide-react";
@@ -19,7 +20,7 @@ export default function PerformancePage() {
   }, []);
 
   const { data, isLoading } = useSWR(
-    userId ? `http://localhost:8000/analytics?user_id=${userId}` : null,
+    userId ? `${getApiUrl()}/analytics?user_id=${userId}` : null,
     fetcher
   );
 

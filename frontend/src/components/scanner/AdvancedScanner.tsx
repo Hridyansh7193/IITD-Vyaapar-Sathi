@@ -1,3 +1,4 @@
+import { getApiUrl } from "@/lib/utils";
 "use client";
 
 import { useState, useEffect } from "react";
@@ -63,7 +64,7 @@ export default function AdvancedScanner() {
   };
 
   const processSale = async (barcode: string) => {
-    const res = await fetch(`http://localhost:8000/v2/products/${userId}/${barcode}`);
+    const res = await fetch(`${getApiUrl()}/v2/products/${userId}/${barcode}`);
     const data = await res.json();
     if (data.exists) {
       setProductData({
@@ -82,7 +83,7 @@ export default function AdvancedScanner() {
 
   const processReceive = async (barcode: string) => {
     // Check v2 endpoints which return explicit cost_price
-    const res = await fetch(`http://localhost:8000/v2/products/${userId}/${barcode}`);
+    const res = await fetch(`${getApiUrl()}/v2/products/${userId}/${barcode}`);
     const data = await res.json();
 
     if (data.exists) {
@@ -115,7 +116,7 @@ export default function AdvancedScanner() {
         return;
       }
       try {
-        const res = await fetch("http://localhost:8000/v2/sales/checkout", {
+        const res = await fetch(`${getApiUrl()}/v2/sales/checkout`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -142,7 +143,7 @@ export default function AdvancedScanner() {
         return;
       }
       try {
-        const res = await fetch("http://localhost:8000/v2/inventory/add", {
+        const res = await fetch(`${getApiUrl()}/v2/inventory/add`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

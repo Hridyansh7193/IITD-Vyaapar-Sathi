@@ -8,7 +8,7 @@ uvicorn[standard]>=0.27.0
 # ── Database (ORM) ─────────────────────────────────────────────────────────────
 sqlalchemy>=2.0.0
 # For PostgreSQL (uncomment when switching from SQLite):
-# psycopg2-binary>=2.9.0
+psycopg2-binary>=2.9.0
 
 # ── Authentication ─────────────────────────────────────────────────────────────
 python-jose[cryptography]>=3.3.0   # JWT encoding/decoding

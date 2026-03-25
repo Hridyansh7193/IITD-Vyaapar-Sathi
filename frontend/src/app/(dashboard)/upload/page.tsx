@@ -1,5 +1,7 @@
 "use client";
 
+import { getApiUrl } from "@/lib/utils";
+
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { UploadCloud, File, CheckCircle, AlertCircle, Loader2, Table as TableIcon, ArrowRight } from "lucide-react";
@@ -72,7 +74,7 @@ export default function UploadPage() {
         setUploadProgress(p => (p < 90 ? p + 2 : p));
       }, 100);
 
-      const res = await fetch(`http://localhost:8000/v2/upload/${uploadMode}`, {
+      const res = await fetch(`${getApiUrl()}/v2/upload/${uploadMode}`, {
         method: "POST",
         body: formData,
       });

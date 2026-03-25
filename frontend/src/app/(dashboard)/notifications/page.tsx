@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Bell, AlertTriangle, CheckCircle, Package, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getApiUrl } from "@/lib/utils";
 import { useState, useEffect } from "react";
 import { createClient } from "@/utils/supabase/client";
 import useSWR from "swr";
@@ -26,7 +26,7 @@ export default function NotificationsPage() {
   }, []);
 
   const { data, isLoading } = useSWR(
-    userId ? `http://localhost:8000/analytics?user_id=${userId}` : null,
+    userId ? `${getApiUrl()}/analytics?user_id=${userId}` : null,
     fetcher
   );
 

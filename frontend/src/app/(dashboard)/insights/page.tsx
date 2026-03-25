@@ -1,4 +1,5 @@
 "use client";
+import { getApiUrl } from "@/lib/utils";
 
 import { motion } from "framer-motion";
 import { Lightbulb, TrendingUp, Package, AlertTriangle, ArrowRight, Loader2 } from "lucide-react";
@@ -25,7 +26,7 @@ export default function InsightsPage() {
   }, []);
 
   const { data, isLoading } = useSWR(
-    userId ? `http://localhost:8000/analytics?user_id=${userId}` : null,
+    userId ? `${getApiUrl()}/analytics?user_id=${userId}` : null,
     fetcher
   );
   const insights = data?.recommendations || [];

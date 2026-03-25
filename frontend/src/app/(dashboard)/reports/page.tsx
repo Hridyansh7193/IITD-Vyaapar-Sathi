@@ -1,4 +1,5 @@
 "use client";
+import { getApiUrl } from "@/lib/utils";
 
 import { motion } from "framer-motion";
 import {
@@ -68,7 +69,7 @@ export default function ReportsPage() {
   }, []);
 
   const { data, isLoading, mutate } = useSWR(
-    userId ? `http://localhost:8000/analytics?user_id=${userId}` : null,
+    userId ? `${getApiUrl()}/analytics?user_id=${userId}` : null,
     fetcher
   );
 
@@ -87,7 +88,7 @@ export default function ReportsPage() {
     const key = `${reportType}-${format}`;
     setDownloading(key);
     try {
-      const url = `http://localhost:8000/reports/generate?user_id=${userId}&report_type=${reportType}&format=${format}`;
+      const url = `${getApiUrl()}/reports/generate?user_id=${userId}&report_type=${reportType}&format=${format}`;
       const response = await fetch(url);
 
       if (!response.ok) {

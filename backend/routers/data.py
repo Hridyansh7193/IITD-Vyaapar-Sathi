@@ -148,7 +148,8 @@ def get_analytics(user_id: str, range: str = "month"):
         "top_products": []
     }
 
-        return compute_analytics(df)
+        from fastapi.concurrency import run_in_threadpool
+        return await run_in_threadpool(compute_analytics, df)
 
     except Exception as e:
         print(f"Error fetching DB: {str(e)}")

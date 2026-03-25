@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, Loader2, Sparkles, MessageSquare } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getApiUrl } from "@/lib/utils";
 import { toast } from "sonner";
 import { createClient } from "@/utils/supabase/client";
 
@@ -44,7 +44,7 @@ export default function AssistantPage() {
         { role: "user", content: userQuery }
       ]);
 
-      const res = await fetch("http://localhost:8000/chat-query", {
+      const res = await fetch(`${getApiUrl()}/chat-query`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
