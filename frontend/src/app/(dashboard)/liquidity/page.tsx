@@ -17,7 +17,7 @@ import {
   Briefcase,
   Home
 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn, getApiUrl } from "@/lib/utils";
 import useSWR, { mutate } from "swr";
 import { fetcher } from "@/lib/fetcher";
 import { toast } from "sonner";
@@ -51,12 +51,12 @@ export default function LiquidityPage() {
   }, []);
 
   const { data: status, error: statusError } = useSWR(
-    userId ? `http://localhost:8000/liquidity/status/${userId}` : null,
+    userId ? `${getApiUrl()}/liquidity/status/${userId}` : null,
     fetcher
   );
 
   const { data: expenses } = useSWR(
-    userId ? `http://localhost:8000/liquidity/expenses/${userId}` : null,
+    userId ? `${getApiUrl()}/liquidity/expenses/${userId}` : null,
     fetcher
   );
 
@@ -65,7 +65,7 @@ export default function LiquidityPage() {
     if (!startingCapital || !userId) return;
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:8000/liquidity/initialize", {
+      const res = await fetch(`${getApiUrl()}/liquidity/initialize`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -75,7 +75,7 @@ export default function LiquidityPage() {
       });
       if (!res.ok) throw new Error("Failed to initialize");
       toast.success("Capital updated successfully!");
-      mutate(`http://localhost:8000/liquidity/status/${userId}`);
+      mutate(`${getApiUrl()}/liquidity/status/${userId}`);
     } catch (err) {
       toast.error("Error updating capital.");
     } finally {
@@ -93,7 +93,7 @@ export default function LiquidityPage() {
       const promises = Object.entries(expensesForm).map(async ([category, data]) => {
          if (!data.amount || parseFloat(data.amount) <= 0) return null;
          
-         return fetch("http://localhost:8000/liquidity/expense", {
+         return fetch(`${getApiUrl()}/liquidity/expense`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -129,8 +129,8 @@ export default function LiquidityPage() {
          Miscellaneous: { amount: "", name: "Other Expenses", isRecurring: false, day: "1" }
       });
       
-      mutate(`http://localhost:8000/liquidity/status/${userId}`);
-      mutate(`http://localhost:8000/liquidity/expenses/${userId}`);
+      mutate(`${getApiUrl()}/liquidity/status/${userId}`);
+      mutate(`${getApiUrl()}/liquidity/expenses/${userId}`);
     } catch (err) {
       toast.error("Error adding expenses.");
     } finally {
@@ -157,8 +157,8 @@ export default function LiquidityPage() {
       if (!res.ok) throw new Error("Failed to update expense");
       toast.success("Expense updated!");
       setEditingExpense(null);
-      mutate(`http://localhost:8000/liquidity/status/${userId}`);
-      mutate(`http://localhost:8000/liquidity/expenses/${userId}`);
+      mutate(`${getApiUrl()}/liquidity/status/${userId}`);
+      mutate(`${getApiUrl()}/liquidity/expenses/${userId}`);
     } catch (err) {
       toast.error("Error updating expense.");
     } finally {
@@ -171,14 +171,14 @@ export default function LiquidityPage() {
     if (!confirm("Are you sure you want to delete this expense?")) return;
     setEditLoading(true);
     try {
-      const res = await fetch(`http://localhost:8000/liquidity/expense/${editingExpense.id}`, {
+      const res = await fetch(`${getApiUrl()}/liquidity/expense/${editingExpense.id}`, {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Failed to delete expense");
       toast.success("Expense deleted!");
       setEditingExpense(null);
-      mutate(`http://localhost:8000/liquidity/status/${userId}`);
-      mutate(`http://localhost:8000/liquidity/expenses/${userId}`);
+      mutate(`${getApiUrl()}/liquidity/status/${userId}`);
+      mutate(`${getApiUrl()}/liquidity/expenses/${userId}`);
     } catch (err) {
       toast.error("Error deleting expense.");
     } finally {

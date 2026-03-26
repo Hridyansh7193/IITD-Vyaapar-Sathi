@@ -9,7 +9,11 @@ from config import supabase # To fetch sales_profit data
 def calculate_liquidity_status(db: Session, user_id: str):
     wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
     if not wallet:
-        return {"error": "Capital not initialized."}
+        # Auto-initialize with zero capital instead of returning error
+        wallet = Wallet(user_id=user_id, starting_capital=0.0)
+        db.add(wallet)
+        db.commit()
+        db.refresh(wallet)
 
     # 1. Total Starting Pot
     current_cash = wallet.starting_capital

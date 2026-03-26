@@ -42,6 +42,12 @@ class Settings(BaseSettings):
     MAX_UPLOAD_SIZE_MB: int = 50
 
     # ── CORS ──────────────────────────────────────────────────────────────────
+    # ── Twilio / Notifications ────────────────────────────────────────────────
+    TWILIO_ACCOUNT_SID: str = ""
+    TWILIO_AUTH_TOKEN: str = ""
+    TWILIO_FROM_NUMBER: str = ""
+    ADMIN_PHONE: str = ""
+
     ALLOWED_ORIGINS: list[str] = ["*"]
 
     model_config = SettingsConfigDict(

@@ -46,7 +46,7 @@ export default function DashboardPage() {
   );
 
   const { data: liqStatus } = useSWR(
-    userId ? `http://localhost:8000/liquidity/status/${userId}` : null,
+    userId ? `${getApiUrl()}/liquidity/status/${userId}` : null,
     fetcher
   );
 
@@ -147,7 +147,9 @@ export default function DashboardPage() {
                         liqStatus.status_token === "SAFE" ? "bg-green-500" : 
                         liqStatus.status_token === "WARNING" ? "bg-amber-500" : "bg-red-500") 
                       }/>
-                      {liqStatus.days_remaining === 999 ? "Liquidity: Safe (>30 days)" : `Runway: ${liqStatus.days_remaining} Days Remaining`}
+                        {liqStatus.days_remaining === 999 ? "Liquidity: Safe (>30 days)" : 
+                         liqStatus.days_remaining !== undefined ? `Runway: ${liqStatus.days_remaining} Days Remaining` : 
+                         "Calculating runway..."}
                    </motion.div>
                 )}
              </AnimatePresence>
@@ -280,13 +282,13 @@ export default function DashboardPage() {
                          <div className="w-11 h-11 rounded-xl bg-primary/5 flex items-center justify-center font-bold text-primary group-hover:bg-primary/10 transition-colors">
                             {p.product[0]}
                          </div>
-                         <div className="flex-1">
-                            <h4 className="text-sm font-bold text-foreground">{p.product}</h4>
-                            <p className="text-[11px] font-medium text-muted-foreground">{p.revenue}</p>
-                         </div>
-                         <div className="text-right">
-                            <p className="text-xs font-bold text-success">+14%</p>
-                         </div>
+                          <div className="flex-1">
+                             <h4 className="text-sm font-bold text-foreground">{p.product}</h4>
+                             <p className="text-[11px] font-medium text-muted-foreground">{p.revenue}</p>
+                          </div>
+                          <div className="text-right">
+                             <p className="text-xs font-bold text-green-500 bg-green-500/10 px-2 py-1 rounded-lg">+14%</p>
+                          </div>
                       </div>
                    ))}
                 </div>

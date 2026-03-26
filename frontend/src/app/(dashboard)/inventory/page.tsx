@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { Package, Search, AlertCircle, Box, LayoutGrid } from "lucide-react";
+import { Package, Search, AlertCircle, Box, LayoutGrid, MessageSquare, Loader2 } from "lucide-react";
 import { getApiUrl } from "@/lib/utils";
 import AIInventoryEntry from "@/components/inventory/AIInventoryEntry";
 import { toast } from "sonner";
@@ -23,6 +23,28 @@ export default function InventoryPage() {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [userId, setUserId] = useState<string | null>(null);
+  const [sendingSms, setSendingSms] = useState(false);
+
+  const handleSendSmsReport = async () => {
+    if (!userId) return;
+    setSendingSms(true);
+    try {
+      const res = await fetch(`${getApiUrl()}/v2/notify/daily-report?user_id=${userId}`, {
+        method: "POST",
+      });
+      const json = await res.json();
+      if (res.ok) {
+        toast.success("📲 Sales report SMS sent to your phone!", { duration: 5000 });
+      } else {
+        toast.error(`Failed: ${json.detail || "Unknown error"}`);
+      }
+    } catch (e) {
+      toast.error("Could not connect to backend.");
+    } finally {
+      setSendingSms(false);
+    }
+  };
+
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -98,15 +120,28 @@ export default function InventoryPage() {
           </p>
         </div>
         
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full md:w-72 pl-10 pr-4 py-2.5 bg-card border border-border rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium text-sm"
-          />
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full md:w-72 pl-10 pr-4 py-2.5 bg-card border border-border rounded-xl outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-medium text-sm"
+            />
+          </div>
+          <button
+            onClick={handleSendSmsReport}
+            disabled={sendingSms || !userId}
+            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-green-600 hover:bg-green-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-semibold rounded-xl transition-all text-sm shadow-sm hover:shadow-green-500/30 hover:shadow-md"
+          >
+            {sendingSms ? (
+              <><Loader2 className="w-4 h-4 animate-spin" /> Sending...</>
+            ) : (
+              <><MessageSquare className="w-4 h-4" /> SMS Today's Report</>
+            )}
+          </button>
         </div>
       </div>
 

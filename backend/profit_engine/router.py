@@ -1,6 +1,6 @@
 import io
 import pandas as pd
-from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form
+from fastapi import APIRouter, HTTPException, Depends, UploadFile, File, Form, BackgroundTasks
 from sqlalchemy.orm import Session
 import datetime
 import uuid
@@ -12,8 +12,77 @@ from models.liquidity import Wallet
 from profit_engine.models import InventoryLog
 from profit_engine.schemas import AdvancedProductInput, AdvancedTransactionInput
 from liquidity_engine.service import calculate_liquidity_status
+from services import notification_service
 
 router = APIRouter()
+
+@router.post("/v2/notify/daily-report")
+async def trigger_daily_report(user_id: str, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    """On-demand: Send a full day's sales analysis SMS to the user right now."""
+    try:
+        import datetime
+        from sqlalchemy import func as sqlfunc
+
+        today_str = datetime.date.today().isoformat()
+        
+        # 1. Get today's sales from Supabase - select all to handle schema variations
+        result = supabase.table("sales_data") \
+            .select("*") \
+            .eq("user_id", user_id) \
+            .gte("date", today_str) \
+            .execute()
+        
+        sales = result.data or []
+        
+        total_revenue = sum(float(s.get("revenue", 0) or 0) for s in sales)
+        total_profit = sum(float(s.get("true_profit", 0) or s.get("profit", 0) or 0) for s in sales)
+        total_items_sold = sum(int(s.get("quantity", 0) or 0) for s in sales)
+
+        # 2. Find top seller
+        product_totals: dict = {}
+        for s in sales:
+            pname = s.get("product", "Unknown")
+            product_totals[pname] = product_totals.get(pname, 0) + (s.get("quantity", 0) or 0)
+        
+        top_product = max(product_totals, key=product_totals.get) if product_totals else "N/A"
+        top_qty = product_totals.get(top_product, 0)
+
+        # 3. Check critical low stock
+        low_stock_count = db.query(Product).filter(
+            Product.user_id == user_id,
+            Product.quantity <= (Product.reorder_level or 5)
+        ).count()
+
+        # 4. Check wallet
+        wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
+        balance = wallet.starting_capital if wallet else 0.0
+
+        # 5. Build the SMS
+        today_display = datetime.date.today().strftime("%b %d, %Y")
+        
+        if len(sales) == 0:
+            msg = (
+                f"📊 Vyaapar-Sathi Report ({today_display}):\n"
+                f"⚠️ No sales recorded today yet.\n"
+                f"💸 Wallet Balance: ₹{balance:,.2f}\n"
+                f"⚠️ Critical Stock: {low_stock_count} products low on inventory."
+            )
+        else:
+            msg = (
+                f"📊 Vyaapar-Sathi Snapshot ({today_display}):\n"
+                f"💰 Revenue: ₹{total_revenue:,.2f} | Profit: ₹{total_profit:,.2f}\n"
+                f"🛒 Total Sold: {total_items_sold} units\n"
+                f"⭐ Top Item: {top_product} ({top_qty} sold)\n"
+                f"⚠️ Low Stock: {low_stock_count} products need reorder\n"
+                f"💸 Wallet: ₹{balance:,.2f}"
+            )
+
+        background_tasks.add_task(notification_service.send_sms, msg)
+        return {"message": "SMS report has been queued!", "preview": msg}
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @router.get("/v2/products/{user_id}/{barcode}")
 def get_product_v2(user_id: str, barcode: str, db: Session = Depends(get_db)):
     """Lookup product with explicit cost awareness."""
@@ -45,7 +114,7 @@ def get_product_v2(user_id: str, barcode: str, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/v2/inventory/add")
-def add_inventory_v2(data: AdvancedProductInput, db: Session = Depends(get_db)):
+def add_inventory_v2(data: AdvancedProductInput, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     try:
         from sqlalchemy import func
         clean_name = data.name.strip() if data.name else ""
@@ -122,6 +191,10 @@ def add_inventory_v2(data: AdvancedProductInput, db: Session = Depends(get_db)):
         if wallet and total_cost > 0:
              wallet.starting_capital -= total_cost
              
+        # Check Liquidity Alert
+        if wallet and wallet.starting_capital < 5000:
+             background_tasks.add_task(notification_service.alert_low_liquidity, wallet.starting_capital)
+
         db.commit()
         return {"message": "Inventory batch logged successfully", "new_total": product.quantity}
     except Exception as e:
@@ -129,7 +202,7 @@ def add_inventory_v2(data: AdvancedProductInput, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/v2/sales/checkout")
-def process_checkout_v2(data: AdvancedTransactionInput, db: Session = Depends(get_db)):
+def process_checkout_v2(data: AdvancedTransactionInput, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
     """Deduct stock and log sale to Supabase with TRUE profit calculation."""
     try:
         product = db.query(Product).filter(Product.sku == data.barcode, Product.user_id == data.user_id).first()
@@ -178,6 +251,13 @@ def process_checkout_v2(data: AdvancedTransactionInput, db: Session = Depends(ge
         if wallet and revenue > 0:
              wallet.starting_capital += revenue
 
+        # Check Alerts AFTER commit/success
+        if product.quantity <= (product.reorder_level or 5):
+            background_tasks.add_task(notification_service.alert_low_stock, product.name, product.quantity)
+        
+        if data.selling_price < total_avg_cost:
+            background_tasks.add_task(notification_service.alert_pricing_anomaly, product.name, (total_avg_cost - data.selling_price))
+
         db.commit()
         return {"message": "Sale completed", "revenue": revenue, "profit": profit}
     except Exception as e:
@@ -203,90 +283,103 @@ async def bulk_receive_stock_v2(user_id: str = Form(...), file: UploadFile = Fil
     if df.empty:
         raise HTTPException(status_code=400, detail="Empty CSV")
         
-    # Pre-fetch liquidity
+    # Pre-fetch liquidity and wallet
     liquidity = calculate_liquidity_status(db, user_id)
     current_liq = liquidity.get("current_liquidity", 0) if "error" not in liquidity else 0
-        
+    wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
+    # Standardize column mapping
+    col_map = {}
+    df.columns = df.columns.str.strip().str.lower().str.replace(" ", "").str.replace("_", "")
+    for c in df.columns:
+        if c in ["product", "item", "productname", "itemname"]: col_map["product"] = c
+        elif c in ["date", "sale_date", "received_date", "inventory_date"]: col_map["date"] = c
+        elif c in ["costprice", "cost", "unitcost", "cp"]: col_map["cost"] = c
+        elif c in ["quantity", "qty", "units"]: col_map["quantity"] = c
+        elif c in ["category", "dept", "department"]: col_map["category"] = c
+
     added = 0
     errors = 0
     failed_items = []
+
     for idx, row in df.iterrows():
         try:
-            product_name = str(row.get("Product", "")).strip()
-            if not product_name or product_name.lower() == "nan":
-                raise ValueError("Product missing")
+            item_name = str(row.get(col_map.get("product", ""), "")).strip()
+            if not item_name or item_name.lower() == "nan":
+                continue 
 
-            date_str = str(row.get("Date", "")).strip()
+            date_str = str(row.get(col_map.get("date", ""), "")).strip()
             if not date_str or date_str.lower() == "nan":
-                raise ValueError("Date missing")
-            parsed_date = pd.to_datetime(date_str, format="mixed", dayfirst=True).to_pydatetime()
+                parsed_date = datetime.datetime.now()
+            else:
+                parsed_date = pd.to_datetime(date_str, format="mixed", dayfirst=True).to_pydatetime()
 
-            cp_raw = row.get("CostPrice") if "CostPrice" in row else row.get("Cost Price")
-            if pd.isna(cp_raw) or str(cp_raw).strip() == "":
-                raise ValueError("CostPrice missing")
-            cost_price = float(cp_raw)
+            cp_val = row.get(col_map.get("cost", ""), 0)
+            cost_price = float(cp_val) if pd.notna(cp_val) else 0.0
 
-            qty_raw = row.get("Quantity")
-            if pd.isna(qty_raw) or str(qty_raw).strip() == "":
-                raise ValueError("Quantity missing")
-            qty = int(qty_raw)
+            qty_val = row.get(col_map.get("quantity", ""), 0)
+            qty = int(qty_val) if pd.notna(qty_val) else 0
+
+            if qty <= 0: continue
             
             total_cost = cost_price * qty
-            if total_cost > current_liq:
-                raise ValueError(f"Insufficient liquidity (Cost: ₹{total_cost}, Available: ₹{current_liq})")
+            if wallet and total_cost > current_liq and wallet.starting_capital > 0:
+                 raise ValueError(f"Insufficient liquidity (Cost: ₹{total_cost:,.2f})")
                 
             current_liq -= total_cost
 
-            category = str(row.get("Category", "Uncategorized"))
-            if category.lower() == "nan":
-                category = "Uncategorized"
+            category = str(row.get(col_map.get("category", ""), "General")).title()
+            if category.lower() == "nan": category = "General"
 
-            product = db.query(Product).filter(Product.name == product_name, Product.user_id == user_id).first()
-            if product:
-                barcode = product.sku
-            else:
-                barcode = f"SKU-{str(uuid.uuid4())[:8].upper()}"
+            product = db.query(Product).filter(
+                Product.user_id == user_id, 
+                Product.name == item_name
+            ).first()
 
             if not product:
-                new_prod = Product(
+                product = Product(
                     user_id=user_id,
-                    name=product_name,
+                    name=item_name,
                     category=category,
-                    price=0.0,  # Initially 0, updated during checkout
+                    price=cost_price * 1.25, # Default Selling Price
                     quantity=qty,
-                    sku=barcode
+                    sku=f"SKU-{str(uuid.uuid4())[:8].upper()}"
                 )
-                db.add(new_prod)
+                db.add(product)
+                added += 1
             else:
                 product.quantity += qty
+                # Update price if it was 0
+                if product.price <= 0:
+                    product.price = cost_price * 1.25
                 
             new_log = InventoryLog(
                 user_id=user_id,
-                barcode=barcode,
+                barcode=product.sku,
                 cost_price=cost_price,
-                selling_price=0.0,
+                selling_price=product.price,
                 quantity_added=qty
             )
             if parsed_date:
                 new_log.date_added = parsed_date
             db.add(new_log)
-            added += 1
             
-            # Deduct Bulk Receive Cost from Wallet
-            wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
             if wallet:
-                wallet.starting_capital -= (cost_price * qty)
+                wallet.current_cash_balance -= total_cost
                 
         except Exception as e:
             errors += 1
-            product_name_str = row.get("Product", f"Row {idx+1}")
-            failed_items.append(f"{product_name_str}: Failed ({str(e)})")
+            failed_items.append(f"Row {idx+1}: {str(e)}")
             continue
-            
+
     db.commit()
-    # Normalize numpy types for JSON serialization
-    preview = df.head(10).fillna("").to_dict(orient="records")
-    return {"message": "Success", "details": f"Received {added} items. Errors: {errors}", "preview": preview, "failed_items": failed_items}
+    
+    return {
+        "status": "success",
+        "added": added,
+        "errors": errors,
+        "failed_items": failed_items[:10], # Show first 10 errors
+        "message": f"Successfully processed {added} items." if errors == 0 else f"Processed with {errors} errors."
+    }
 
 @router.post("/v2/upload/checkout")
 async def bulk_checkout_v2(user_id: str = Form(...), file: UploadFile = File(...), db: Session = Depends(get_db)):
@@ -309,6 +402,9 @@ async def bulk_checkout_v2(user_id: str = Form(...), file: UploadFile = File(...
     errors = 0
     rol_alerts = 0
     failed_items = []
+    
+    # Pre-fetch wallet for performance
+    wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
     
     for idx, row in df.iterrows():
         try:
@@ -394,7 +490,6 @@ async def bulk_checkout_v2(user_id: str = Form(...), file: UploadFile = File(...
                     raise filter_e
                     
             # Add Bulk Sale Revenue to Wallet
-            wallet = db.query(Wallet).filter(Wallet.user_id == user_id).first()
             if wallet:
                 wallet.starting_capital += revenue
                     

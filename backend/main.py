@@ -19,6 +19,9 @@ warnings.filterwarnings("ignore", message="All support for the `google.generativ
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from contextlib import asynccontextmanager
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from services import notification_service
 
 from config.settings import get_settings
 from database import init_db
@@ -35,7 +38,32 @@ from liquidity_engine.router import router as liquidity_router
 
 settings = get_settings()
 
-# ── App Initialisation ────────────────────────────────────────────────────────
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # --- Startup Logic ---
+    try:
+        init_db()
+        print("✅ Database initialized.")
+    except Exception as e:
+        print(f"⚠️  Database initialization failed: {e}")
+
+    # Set up APScheduler for Daily Alerts
+    scheduler = AsyncIOScheduler()
+    
+    # 1. Daily Snapshot at 9:00 PM
+    scheduler.add_job(notification_service.send_daily_snapshot, 'cron', hour=21, minute=0)
+    
+    # 2. Check for Missed Sales at 10:00 PM
+    scheduler.add_job(notification_service.check_missed_sales, 'cron', hour=22, minute=0)
+    
+    scheduler.start()
+    print("⏰ Vyaapar-Sathi Scheduler Started.")
+
+    yield
+    
+    # --- Shutdown Logic ---
+    scheduler.shutdown()
+    print("🛑 Scheduler shutdown.")
 
 app = FastAPI(
     title=settings.APP_NAME,
@@ -48,6 +76,7 @@ app = FastAPI(
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
+    lifespan=lifespan
 )
 
 # ── Middleware Stack (order matters — outermost wraps innermost) ───────────────
@@ -66,18 +95,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-# ── Startup Event ─────────────────────────────────────────────────────────────
-
-@app.on_event("startup")
-def on_startup():
-    """Creates DB tables on first run. Safe to call multiple times."""
-    try:
-        init_db()
-    except Exception as e:
-        print(f"⚠️  WARNING: Database connection failed during startup: {e}")
-        print("Backend is still online, but DB-dependent features (analytics, auth) will fail.")
-
 
 # ── v1 API Routes (mobile-app ready, JWT-protected) ───────────────────────────
 
