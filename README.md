@@ -42,6 +42,3 @@ You can run the entire backend via Docker:
 docker build -t vyaapar-api .
 docker run -p 8000:8000 --env-file .env vyaapar-api
 ```
-
-## 📄 License
-MIT License. Developed for the IITD Hackathon.
